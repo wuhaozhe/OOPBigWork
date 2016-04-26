@@ -18,6 +18,9 @@ void SearchWords()
 {
 	//查词，包括查询历史和清空历史 
 }
+void TestWords()
+{
+}
 void Interact()
 {
 	//选择背单词/调整记忆策略/统计生词/添加例句/查词
