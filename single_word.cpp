@@ -1,13 +1,13 @@
-#include"single_word.h"
-string single_word::getchinese()
+#include "Single_Word.h"
+string Single_Word::Get_Chinese()
 {
-	return chinese;
+	return Chinese;
 }
-string single_word::getword()
+string Single_Word::Get_Word()
 {
-	return word;
+	return Word;
 }
-int get_difficulty()
+int Get_Difficulty()
 {
-	return difficulty;
+	return Difficulty;
 }

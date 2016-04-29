@@ -5,8 +5,8 @@
 class User{
 private:
 	vector<string> search_history;
-	void AddExample();
-	void ClearHistory();
-	void AddHistory(string Word);
+	void Add_Example();
+	void Clear_History();
+	void Add_History(string Word);
 };
 #endif

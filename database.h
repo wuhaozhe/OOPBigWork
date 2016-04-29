@@ -1,18 +1,18 @@
-#ifndef _database_H
-#define _database_H
-#include"single_word.h"
+#ifndef _Database_H
+#define _Database_H
+#include "Single_Word.h"
 class database     //存单词的数据库
 {
 private:
-	vector<single_word> words;  //存储单词  
-	single_word get_single_word(string temp_word);   //获得该单词所属的类 
-	database(const ifstream &fin);
-	database() = default;
+	vector<Single_Word> Words;  //存储单词  
+	Single_Word Get_Single_Word(string Temp_Word);   //获得该单词所属的类 
+	Database(const ifstream &fin);
+	Database() = default;
 public:
-	bool exist(string temp_word);  //该单词是否存在 
-	string get_chinese(string temp_word);		//获得该单词释义 
-	int get_difficulty(string temp_word);		//获得该单词难度 
-	vector<string> get_examples(string temp_word);     //获得该单词例句的vector
-	void add_example(string temp_word, string temp_example);
+	bool Exist(string Temp_Word);  //该单词是否存在 
+	string Get_Chinese(string Temp_Word);		//获得该单词释义 
+	int Get_Difficulty(string Temp_Word);		//获得该单词难度 
+	vector<string> Get_Examples(string Temp_Word);     //获得该单词例句的vector
+	void Add_Example(string Temp_Word, string Temp_Example);
 };
 #endif
