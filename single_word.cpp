@@ -1,25 +1,25 @@
 #include "Single_Word.h"
-string Single_Word::Get_Chinese()
+std::string Single_Word::Get_Chinese()
 {
 	return Chinese;
 }
-string Single_Word::Get_Word()
+std::string Single_Word::Get_Word()
 {
 	return Word;
 }
-int Get_Difficulty()
+int Single_Word::Get_Difficulty()
 {
 	return Difficulty;
 }
-vector<string> Single_Word::Get_Example()
+std::vector<std::string> Single_Word::Get_Example()
 {
 	return Example;
 }
-void Add_Example(string Temp_Example)
+void Single_Word::Add_Example(std::string Temp_Example)
 {
-	Example::push_back(Temp_Example);
+	Example.push_back(Temp_Example);
 }
-Single_word::(string temp)
+Single_Word::Single_Word(std::string temp)
 {
 	Difficulty = temp[0] - '0';
 	int i = 1;
@@ -29,7 +29,6 @@ Single_word::(string temp)
 		i++;
 	}
 	i += 2;
-	for(; i <= (temp.size() - 1); i++)
-		Word += temp[i];
+	for(; i <= (temp.size() - 2); i++)
+		Chinese += temp[i];
 }
-

@@ -6,6 +6,8 @@ int main()
 	ifstream fin;
 	fin.open("tempdict.txt");
 	Database temporary(fin);
-	cout<<temporary.Get_Chinese("abacus")<<endl;
+	temporary.Add_Example("abacus", "·¶Ò¯Ì«Ò¯ÁË");
+	temporary.Add_Example("abattoir", "hahahahah");
+	cout << (temporary.Get_Examples("abattoir"))[0];
 	return 0;
 }
