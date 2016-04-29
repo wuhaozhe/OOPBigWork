@@ -23,4 +23,19 @@ bool Datebase::Exist(string Temp_word){
 	}
 	return (Temp_Word == Words[l].Get_Word);
 }
+string Database::Get_Chinese(string Temp_Word){
+	if (Exist(Temp_Word)) return Get_Single_Word(Temp_Word).Get_Chinese();
+	else return "";
+}
+int Database::Get_Difficulty(string Temp_Word){
+	if (Exist(Temp_Word)) return Get_Single_Word(Temp_Word).Get_Difficulty();
+	else return 0;
 
+vector<string> Get_Examples(string Temp_Word){
+	if (Exist(Temp_Word)) return Get_Single_Word(Temp_Word).Get_Example();
+	else { vector<string> Temp; Temp.clear(); return Temp; }
+}
+void Add_Example(string Temp_Word, string Temp_Example){
+	if (Exist(Temp_Word)) Get_Single_Word(Temp_Word).Add_Example(Temp_Example);
+	else std::cout << Temp_Word << "doesn't exist." << std::endl;
+}
