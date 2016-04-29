@@ -6,7 +6,7 @@ class database     //存单词的数据库
 private:
 	vector<Single_Word> Words;  //存储单词  
 	Single_Word Get_Single_Word(string Temp_Word);   //获得该单词所属的类 
-	Database(const ifstream &fin);
+	Database(ifstream &fin);
 	Database() = default;
 public:
 	bool Exist(string Temp_Word);  //该单词是否存在 
