@@ -16,7 +16,7 @@ public:
 	int Get_Difficulty();		//获得难度 
 	void Add_Example(string Temp_Example);       //加入例句 
 	vector<string> Get_Example();                  //获得该单词例句 
-	Single_Word(ifstream& fin);
+	Single_Word(string temp);
 	Single_Word() = default;
 };
 #endif
