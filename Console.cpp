@@ -30,8 +30,9 @@ void Console::Show_Search_History(){
 }
 void Console::Search(){
 	while (1){
-		std::cout << "What do you want to do? 0.Search Word 1. Get Search History 2.Clear Search History 3.Exit"
-		<< std::endl;
+		std::cout << "What do you want to do?" << std::endl << "0.Search Word" << std::endl
+		<< "1.Get Search History" << std::endl << "2.Clear Search History" << std::endl
+		<< "3.Exit" << std::endl;
 		char Temp[200]; std::string Temp_Word, Chinese;
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1){
