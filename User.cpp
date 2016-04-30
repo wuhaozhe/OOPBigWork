@@ -287,7 +287,7 @@ void User::Add_History(std::string Word)
 	{
 		for(int i = 1; i <= 14; i++)
 			Search_History[i - 1] = Search_History[i];
-		Search_History.push_back(Word);
+		Search_History[14] = Word;
 	}
 }
 void User::Clear_History()
