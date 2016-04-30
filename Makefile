@@ -1,4 +1,4 @@
-CPPFLAG = -std=c++11 -Wall
+CPPFLAG = -std=c++11
 
 all: temporary.exe
 

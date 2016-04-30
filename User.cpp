@@ -281,6 +281,7 @@ void User::Add_History(std::string Word)
 			fout<<temp_record[i]<<std::endl;
 	}
 	fout.close();
+	Search_History.push_back(Word);
 }
 void User::Clear_History()
 {
@@ -308,6 +309,7 @@ void User::Clear_History()
 		else
 			fout<<temp_record[i]<<std::endl;
 	}
+	Search_History.clear();
 }
 void User::Change_Memory_Strategy_Number(int Wanted_Strategy)
 {
