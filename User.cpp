@@ -281,7 +281,14 @@ void User::Add_History(std::string Word)
 			fout<<temp_record[i]<<std::endl;
 	}
 	fout.close();
-	Search_History.push_back(Word);
+	if(Search_History.size() < 15)
+		Search_History.push_back(Word);
+	else
+	{
+		for(int i = 1; i <= 14; i++)
+			Search_History[i - 1] = Search_History[i];
+		Search_History.push_back(Word);
+	}
 }
 void User::Clear_History()
 {
