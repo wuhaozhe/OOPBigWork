@@ -37,10 +37,11 @@ void Console::Search(){
 		if (strlen(Temp) == 1){
 			switch (Temp[0]){
 				case '0':
-					std::cin >> Temp_Word;
+					std::cin.getline(Temp, 200); Temp_Word = Temp;
 					Chinese = data->Get_Chinese(Temp_Word);
 					if (Chinese == "") std::cout << "No such Word." << std::endl;
 					else std::cout << Chinese << std::endl;
+					Current_User->Add_History(Temp_Word);
 					break;
 				case '1':
 					Show_Search_History();
