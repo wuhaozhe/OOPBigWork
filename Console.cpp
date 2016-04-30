@@ -2,7 +2,7 @@
 #include <string>
 #include <cstring>
 #include "Console.h"
-void Console::ChangeReciteStrategy(){
+void Console::Change_Memory_Strategy(){
 	std::cout << "Which memory strategy do you want? 1.Shanbay mode 2.Towords mode" << std::endl;
 	char Temp[200];
 	std::cin.getline(Temp, 200);
@@ -46,19 +46,30 @@ void Console::Search(){
 		}
 	}
 }
-Console::Console(){
-	//导入单词库
-	//选择登陆/注册
+Console::Console(database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
+	switch (Current_User->Memory_Strategy){
+		case 1:
+			memory_strategy = new Memory_strategy_Shanby(Current_User, data);
+			break;
+		case 2:
+			memory_strategy = new Memory_strategy_Towords(Current_User, data);
+			break;
+	}
 }
 void Console::Run(){
 	while (1){
-		//输出功能信息
-		// if (recite) recitestrategy->recite();
+		std::cout << "What do you want to do? 1.Memory words 2.Search words 3.Test your vocabulary 4.Statistics of new words 5. Change memory strategy 6.Exit" << std::endl;
+		char Temp[200];
+		std::cin.getline(Temp, 200);
+		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '6'){
+			switch (Temp[0]){
+				case '1': memory_strategy->Run(); break;
+				case '2': Search(); break;
+				case '3': test_strategy->Run(); break;
+				case '4': newwords_strategy->Run(); break;
+				case '5': Change_Memory_Strategy(); break;
+				case '6': return;
+			}
+		}
 	}
-}
-void Console::SearchWords(){
-	//选择查词/查询历史/清空历史 
-	//输入单词
-	//调用GetWord
-	//添加历史信息 
 }
