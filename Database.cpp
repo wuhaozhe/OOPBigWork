@@ -17,6 +17,9 @@ Database::Database(std::ifstream &fin){
 		Words.push_back(Single_Word(temp));
 	}
 }
+std::string Database::Get_English(int number){
+	return Words[number].Get_Word();
+}
 bool Database::Exist(std::string Temp_Word){
 	int l = 0, r = Words.size()-1, mid;
 	if  (Temp_Word < Words[0].Get_Word()) return 0;

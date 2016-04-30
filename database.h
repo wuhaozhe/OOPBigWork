@@ -9,6 +9,7 @@ private:
 	Database() = default;
 public:
 	Database(std::ifstream &fin);
+	std::string Get_English(int number);
 	bool Exist(std::string Temp_Word);  //该单词是否存在 
 	std::string Get_Chinese(std::string Temp_Word);		//获得该单词释义  如果不存在返回空串 
 	int Get_Difficulty(std::string Temp_Word);		//获得该单词难度  如果不存在返回0 

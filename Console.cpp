@@ -1,12 +1,20 @@
-#include <iostream>
-#include <string>
 #include <cstring>
 #include "Console.h"
 void Console::Change_Memory_Strategy(){
 	std::cout << "Which memory strategy do you want? 1.Shanbay mode 2.Towords mode" << std::endl;
 	char Temp[200];
 	std::cin.getline(Temp, 200);
-	if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2') Current_User->Change_Memory_Strategy(Temp[0]-'0');
+	if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
+		Current_User->Change_Memory_Strategy(Temp[0]-'0');
+		switch (Temp[0]){
+			case '1':
+				memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
+				break;
+			case '2':
+				memory_strategy = new Memory_Strategy_Towords(Current_User, dasta);
+				break;
+		}
+	}
 	else std::cout << "No such strategy." << std::endl;
 }
 std::string Console::Get_Word(std::string Temp_Word){
@@ -46,6 +54,24 @@ void Console::Search(){
 		}
 	}
 }
+void Console::Test(){
+	while (1){
+		std::cout << "Which test mode do you want? 1.T/F 2.multiple-choice" << std::endl;
+		char Temp[200];
+		std::cin.getline(Temp, 200);
+		if (strlen(Temp) == 1) && Temp[0] >= '1' && Temp[0] <= '2'){
+			switch (Temp[0]){
+				case '1':
+					test_strategy = new Test_Strategy_TF(data);
+					break;
+				case '2':
+					test_strategy = new Test_Strategy_Multi(data);
+					break;
+			}
+			test_strategy->Run();
+		}
+	}
+}
 Console::Console(database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
 	switch (Current_User->Memory_Strategy){
 		case 1:
@@ -65,8 +91,11 @@ void Console::Run(){
 			switch (Temp[0]){
 				case '1': memory_strategy->Run(); break;
 				case '2': Search(); break;
-				case '3': test_strategy->Run(); break;
-				case '4': newwords_strategy->Run(); break;
+				case '3': Test(); break;
+				case '4': 
+					newwords_strategy = new NewWords_Strategy1(Current_User, data);
+					newwords_strategy->Run();
+					break;
 				case '5': Change_Memory_Strategy(); break;
 				case '6': return;
 			}
