@@ -2,6 +2,14 @@
 #define CONSOLE_H
 #include "database.h"
 #include "User.h"
+#include "Memory_Strategy.h"
+#include "Memory_Strategy_Shanbay.h"
+#include "Memory_Strategy_Towords.h"
+#include "NewWords_Strategy.h"
+#include "NewWords_Strategy1.h"
+#include "Test_Strategy.h"
+#include "Test_Strategy_TF.h"
+#include "Test_Strategy_Multi.h"
 class Console{
 private:
 	Database *data;
@@ -18,9 +26,9 @@ private:
 	void Test();	//选择测试模式并测试 1.判断题 2.选择题  
 	void NewWords();
 	
-	Console(Database *temp_data, User *temp_user); 
-	Console() = default;
 public:
 	void Run();
+	Console(Database *temp_data, User *temp_user); 
+	Console() = default;
 };
 #endif

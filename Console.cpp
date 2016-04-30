@@ -5,13 +5,13 @@ void Console::Change_Memory_Strategy(){
 	char Temp[200];
 	std::cin.getline(Temp, 200);
 	if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
-		Current_User->Change_Memory_Strategy(Temp[0]-'0');
+		Current_User->Change_Memory_Strategy_Number(Temp[0]-'0');
 		switch (Temp[0]){
 			case '1':
 				memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
 				break;
 			case '2':
-				memory_strategy = new Memory_Strategy_Towords(Current_User, dasta);
+				memory_strategy = new Memory_Strategy_Towords(Current_User, data);
 				break;
 		}
 	}
@@ -24,7 +24,7 @@ void Console::Show_Search_History(){
 	std::vector<std::string>History = Current_User->Get_Search_History();
 	if (History.size() == 0) std::cout << "No search history yet." << std::endl;
 	else{
-		cout << "Last " << History.size() << " search history:" << std::endl;
+		std::cout << "Last " << History.size() << " search history:" << std::endl;
 		for (int i = 0; i < (int)History.size(); ++i) std::cout << History[i] << std::endl;
 	}
 }
@@ -32,7 +32,7 @@ void Console::Search(){
 	while (1){
 		std::cout << "What do you want to do? 0.Search Word 1. Get Search History 2.Clear Search History 3.Exit"
 		<< std::endl;
-		char Temp[200]; string Temp_Word, Chinese;
+		char Temp[200]; std::string Temp_Word, Chinese;
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1){
 			switch (Temp[0]){
@@ -40,7 +40,7 @@ void Console::Search(){
 					std::cin >> Temp_Word;
 					Chinese = data->Get_Chinese(Temp_Word);
 					if (Chinese == "") std::cout << "No such Word." << std::endl;
-					else std::cout << Chinese << endl;
+					else std::cout << Chinese << std::endl;
 					break;
 				case '1':
 					Show_Search_History();
@@ -59,7 +59,7 @@ void Console::Test(){
 		std::cout << "Which test mode do you want? 1.T/F 2.multiple-choice" << std::endl;
 		char Temp[200];
 		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1) && Temp[0] >= '1' && Temp[0] <= '2'){
+		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
 			switch (Temp[0]){
 				case '1':
 					test_strategy = new Test_Strategy_TF(data);
@@ -76,7 +76,7 @@ void Console::NewWords(){
 	newwords_strategy = new NewWords_Strategy1(Current_User, data);
 	newwords_strategy->Run();
 }
-Console::Console(database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
+Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
 	switch (Current_User->Memory_Strategy){
 		case 1:
 			memory_strategy = new Memory_strategy_Shanby(Current_User, data);

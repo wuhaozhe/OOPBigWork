@@ -1,0 +1,58 @@
+# Project: Project1
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o
+LINKOBJ  = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc --std=c++11
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = 1.exe
+CXXFLAGS = $(CXXINCS) -std=c++11
+CFLAGS   = $(INCS) -std=c++11
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+Console.o: Console.cpp
+	$(CPP) -c Console.cpp -o Console.o $(CXXFLAGS)
+
+single_word.o: single_word.cpp
+	$(CPP) -c single_word.cpp -o single_word.o $(CXXFLAGS)
+
+User.o: User.cpp
+	$(CPP) -c User.cpp -o User.o $(CXXFLAGS)
+
+Database.o: Database.cpp
+	$(CPP) -c Database.cpp -o Database.o $(CXXFLAGS)
+
+Memory_Strategy.o: Memory_Strategy.cpp
+	$(CPP) -c Memory_Strategy.cpp -o Memory_Strategy.o $(CXXFLAGS)
+
+Memory_Strategy_Shanbay.o: Memory_Strategy_Shanbay.cpp
+	$(CPP) -c Memory_Strategy_Shanbay.cpp -o Memory_Strategy_Shanbay.o $(CXXFLAGS)
+
+Test_Strategy.o: Test_Strategy.cpp
+	$(CPP) -c Test_Strategy.cpp -o Test_Strategy.o $(CXXFLAGS)
+
+Test_Strategy_TF.o: Test_Strategy_TF.cpp
+	$(CPP) -c Test_Strategy_TF.cpp -o Test_Strategy_TF.o $(CXXFLAGS)
+
+Test_Strategy_Multi.o: Test_Strategy_Multi.cpp
+	$(CPP) -c Test_Strategy_Multi.cpp -o Test_Strategy_Multi.o $(CXXFLAGS)
+
+NewWords_Strategy.o: NewWords_Strategy.cpp
+	$(CPP) -c NewWords_Strategy.cpp -o NewWords_Strategy.o $(CXXFLAGS)
+
+NewWords_Strategy1.o: NewWords_Strategy1.cpp
+	$(CPP) -c NewWords_Strategy1.cpp -o NewWords_Strategy1.o $(CXXFLAGS)

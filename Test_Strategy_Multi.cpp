@@ -28,3 +28,5 @@ bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
 	}
 	return (answer == Temp1);
 }
+Test_Strategy_Multi::Test_Strategy_Multi(Database *temp_data): data(temp_data), times(10){
+}

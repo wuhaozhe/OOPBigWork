@@ -22,3 +22,5 @@ bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
 	}
 	return (answer == Temp1);
 }
+Test_Strategy_TF::Test_Strategy_TF(Database *temp_data): data(temp_data), times(10){
+}
