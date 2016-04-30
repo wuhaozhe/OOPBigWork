@@ -72,6 +72,10 @@ void Console::Test(){
 		}
 	}
 }
+void Console::NewWords(){
+	newwords_strategy = new NewWords_Strategy1(Current_User, data);
+	newwords_strategy->Run();
+}
 Console::Console(database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
 	switch (Current_User->Memory_Strategy){
 		case 1:
@@ -92,10 +96,7 @@ void Console::Run(){
 				case '1': memory_strategy->Run(); break;
 				case '2': Search(); break;
 				case '3': Test(); break;
-				case '4': 
-					newwords_strategy = new NewWords_Strategy1(Current_User, data);
-					newwords_strategy->Run();
-					break;
+				case '4': NewWords(); break;
 				case '5': Change_Memory_Strategy(); break;
 				case '6': return;
 			}

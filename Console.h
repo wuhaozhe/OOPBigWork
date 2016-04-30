@@ -16,6 +16,7 @@ private:
 	void Show_Search_History();     //显示查询历史
 	void Search();   //在search中，根据用户要求决定是显示查询历史还是查单词 
 	void Test();	//选择测试模式并测试 1.判断题 2.选择题  
+	void NewWords();
 	
 	Console(Database *temp_data, User *temp_user); 
 	Console() = default;
