@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o
-LINKOBJ  = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o
+OBJ      = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o Memory_Strategy_Towords.o
+LINKOBJ  = Console.o single_word.o User.o Database.o Memory_Strategy.o Memory_Strategy_Shanbay.o Test_Strategy.o Test_Strategy_TF.o Test_Strategy_Multi.o NewWords_Strategy.o NewWords_Strategy1.o Memory_Strategy_Towords.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc --std=c++11
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -56,3 +56,6 @@ NewWords_Strategy.o: NewWords_Strategy.cpp
 
 NewWords_Strategy1.o: NewWords_Strategy1.cpp
 	$(CPP) -c NewWords_Strategy1.cpp -o NewWords_Strategy1.o $(CXXFLAGS)
+
+Memory_Strategy_Towords.o: Memory_Strategy_Towords.cpp
+	$(CPP) -c Memory_Strategy_Towords.cpp -o Memory_Strategy_Towords.o $(CXXFLAGS)

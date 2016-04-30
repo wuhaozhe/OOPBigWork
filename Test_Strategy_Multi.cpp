@@ -8,7 +8,7 @@ bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
 		if (i == Temp1) std::cout << data->Get_Chinese(Temp_Word);
 		else{
 			while (1){
-				Temp2 = rand()%data->Words.size();
+				Temp2 = rand()%data->Get_Words_Size();
 				if (data->Get_English(Temp2) != Temp_Word) break;
 			}
 			std::cout << data->Get_Chinese(data->Get_English(Temp2));
@@ -28,5 +28,5 @@ bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
 	}
 	return (answer == Temp1);
 }
-Test_Strategy_Multi::Test_Strategy_Multi(Database *temp_data): data(temp_data), times(10){
+Test_Strategy_Multi::Test_Strategy_Multi(Database *temp_data): Test_Strategy(temp_data){
 }

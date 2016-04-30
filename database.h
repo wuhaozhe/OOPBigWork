@@ -15,5 +15,6 @@ public:
 	int Get_Difficulty(std::string Temp_Word);		//获得该单词难度  如果不存在返回0 
 	std::vector<std::string> Get_Examples(std::string Temp_Word);     //获得该单词例句的vector
 	void Add_Example(std::string Temp_Word, std::string Temp_Example);
+	int Get_Words_Size();
 };
 #endif

@@ -11,5 +11,6 @@ int main()
 	fin.close();
 	User newuser(&temporary);
 	Console console(&temporary, &newuser);
+	console.Run();
 	return 0;
 }

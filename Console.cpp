@@ -56,10 +56,10 @@ void Console::Search(){
 }
 void Console::Test(){
 	while (1){
-		std::cout << "Which test mode do you want? 1.T/F 2.multiple-choice" << std::endl;
+		std::cout << "Which test mode do you want? 1.T/F 2.multiple-choice 3.Exit" << std::endl;
 		char Temp[200];
 		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
+		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '3'){
 			switch (Temp[0]){
 				case '1':
 					test_strategy = new Test_Strategy_TF(data);
@@ -67,6 +67,8 @@ void Console::Test(){
 				case '2':
 					test_strategy = new Test_Strategy_Multi(data);
 					break;
+				case '3':
+					return;
 			}
 			test_strategy->Run();
 		}
@@ -77,18 +79,21 @@ void Console::NewWords(){
 	newwords_strategy->Run();
 }
 Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
-	switch (Current_User->Memory_Strategy){
+	switch (Current_User->Get_Memory_Strategy()){
 		case 1:
-			memory_strategy = new Memory_strategy_Shanby(Current_User, data);
+			memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
 			break;
 		case 2:
-			memory_strategy = new Memory_strategy_Towords(Current_User, data);
+			memory_strategy = new Memory_Strategy_Towords(Current_User, data);
 			break;
 	}
 }
 void Console::Run(){
 	while (1){
-		std::cout << "What do you want to do? 1.Memory words 2.Search words 3.Test your vocabulary 4.Statistics of new words 5. Change memory strategy 6.Exit" << std::endl;
+		std::cout << "What do you want to do?" << std::endl << "1.Memory words" << std::endl
+		<< "2.Search words" << std::endl << "3.Test your vocabulary" << std::endl
+		<< "4.Statistics of new words" << std::endl << "5.Change memory strategy" << std::endl
+		<< "6.Exit" << std::endl;
 		char Temp[200];
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '6'){

@@ -46,3 +46,6 @@ void Database::Add_Example(std::string Temp_Word, std::string Temp_Example){
 	if (Exist(Temp_Word)) Get_Single_Word(Temp_Word).Add_Example(Temp_Example);
 	else std::cout << Temp_Word << "doesn't exist." << std::endl;
 }
+int Database::Get_Words_Size(){
+	return Words.size();
+}
