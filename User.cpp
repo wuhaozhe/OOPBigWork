@@ -5,7 +5,7 @@ int User::Get_Difficulty()
 }
 int User::Get_Memory_Strategy()
 {
-	return Memory_Strategy;
+	return Memory_Strategy_Number;
 }
 std::vector<std::string> User::Get_Search_History()
 {
@@ -201,7 +201,7 @@ User::User(Database *temporary): wordslist(temporary)
 	User_Memorized_filename = filename_one;
 	User_Examples_filename = filename_two;
 	fin.open(filename_one);
-	fin>>Memory_Strategy;
+	fin>>Memory_Strategy_Number;
 	fin>>Difficulty_Of_User;
 	std::string temp_history;
 	for(int i = 1; i <= 15; i++)
@@ -308,7 +308,7 @@ void User::Clear_History()
 }
 void User::Change_Memory_Strategy_Number(int Wanted_Strategy)
 {
-	Memory_Strategy = Wanted_Strategy;
+	Memory_Strategy_Number = Wanted_Strategy;
 	std::ifstream fin;
 	fin.open(User_Memorized_filename);
 	char temp_input[200] = {0};
@@ -324,7 +324,7 @@ void User::Change_Memory_Strategy_Number(int Wanted_Strategy)
 	fin.close();
 	std::ofstream fout;
 	fout.open(User_Memorized_filename);
-	fout<<Memory_Strategy<<" "<<temp_record[0][2]<<std::endl;
+	fout<<Memory_Strategy_Number<<" "<<temp_record[0][2]<<std::endl;
 	for(int i = 1; i < temp_record.size(); i++)
 		fout<<temp_record[i]<<std::endl;
 	fout.close();

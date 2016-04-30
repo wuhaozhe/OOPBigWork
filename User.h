@@ -13,7 +13,7 @@ class User{
 private:
 	std::vector<std::string> Search_History;       //查询历史 
 	int Difficulty_Of_User;				//用户所设定的难度 
-	int Memory_Strategy;				//用户所设定的记忆策略 
+	int Memory_Strategy_Number;				//用户所设定的记忆策略 
 	std::map<std::string, std::pair<int, int>> Memorized_Words_Times;
 	Database *wordslist;
 	std::string User_Memorized_filename;
