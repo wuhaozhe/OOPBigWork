@@ -5,13 +5,13 @@ class Console{
 private:
 	database *data;
 	User *Current_User;
-	ReciteStrategy *recite_strategy;       //记忆策略 
-	NewWordsStrategy *newwords_strategy;		//生词统计解释策略
-	TestWordsStrategy *test_strategy;       //在线单词测试策略 
+	Memory_Strategy *memory_strategy;       //记忆策略 1表示扇贝模式，2表示百词斩模式 
+	NewWords_Strategy *newwords_strategy;		//生词统计解释策略
+	Test_Words_Strategy *test_strategy;       //在线单词测试策略 
 	
 	void ChangeReciteStrategy();
 	
-	int GetWord(std::string query);      //获得单词释义
+	std::string Get_Word(std::string Temp_Word);      //获得单词释义
 	void Show_Search_History();     //显示查询历史
 	void Search();   //在search中，根据用户要求决定是显示查询历史还是查单词 
 	
