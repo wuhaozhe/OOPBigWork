@@ -1,0 +1,24 @@
+#include "Test_Strategy_TF.h"
+bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
+	int Temp1, Temp2, answer;
+	Temp1 = rand()%2;
+	std::cout << Temp_Word << std::endl;
+	if (Temp1 == 0) std::cout << data->Get_Chinese(Temp_Word) << std::endl;
+	else{
+		while (1){
+			Temp2 = rand()%data->Words.size();
+			if (data->Get_English(Temp2) != Temp_Word) break;
+		}
+		std::cout << data->Get_Chinese(data->Get_English(Temp2)) << std::endl;
+	}
+	std::cout << "Press t for true or f for false" << std::endl;
+	char Temp[200];
+	while (1){
+		std::cin.getline(Temp, 200);
+		if (strlen(Temp) == 1){
+			if (Temp[0] == 't') { answer = 0; break; }
+			if (Temp[0] == 'f') { answer = 1; break; }
+		}
+	}
+	return (answer == Temp1);
+}
