@@ -87,6 +87,7 @@ User::User(Database *temporary): wordslist(temporary)
 			std::cin.getline(temporaryd, 100);
 			temp = temporaryd;
 		}
+		
 		std::cout<<"你希望选择的难度"<<std::endl;
 		std::cout<<"1. 简单，2. 一般，3. 较难，4. 难， 5. 地狱模式"<<std::endl;
 		std::cout<<"请输入难度所对应的数字"<<std::endl;
@@ -98,8 +99,9 @@ User::User(Database *temporary): wordslist(temporary)
 			memset(flag, 0, sizeof(flag)); 
 			std::cin.getline(flag, sizeof(flag));
 		}
-		fout<<flag[0]<<" ";
+		char b1 = flag[0];
 		Difficulty_Of_User = (flag[0] - '0');
+		
 		std::cout<<"你希望选择的背单词模式"<<std::endl;
 		std::cout<<"1. 扇贝模式， 2. 百词斩模式"<<std::endl;
 		std::cout<<"请输入模式所对应的数字"<<std::endl;
@@ -111,7 +113,8 @@ User::User(Database *temporary): wordslist(temporary)
 			memset(flag, 0, sizeof(flag)); 
 			std::cin.getline(flag, sizeof(flag));
 		}
-		fout<<flag[0];
+		fout<<flag[0]<<" "<<b1;
+		Memory_Strategy_Number = flag[0] - '0';
 		for(int i = 1; i <= 16; i++)
 			fout<<std::endl;
 		fout.close();
