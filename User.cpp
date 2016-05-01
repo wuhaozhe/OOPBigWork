@@ -24,6 +24,10 @@ std::pair<int, int> User::Get_Memorized_Times(std::string Temp_Word)
 		return a;
 	}
 }
+std::map<std::string, std::pair<int, int>> User::Whole_Memorized_Words()
+{
+	return Memorized_Words_Times;
+}
 
 User::User(Database *temporary): wordslist(temporary)
 {

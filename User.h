@@ -23,6 +23,7 @@ public:
 	int Get_Memory_Strategy();		//获得记忆策略 
 	std::vector<std::string> Get_Search_History();     //获得查询历史 
 	std::pair<int, int> Get_Memorized_Times(std::string Temp_Word);   //第一个是背对，第二个是背过 
+	std::map<std::string, std::pair<int, int>> Whole_Memorized_Words();    //返回是否背过该单词 
 	void Add_Example(std::string Word, std::string Example);		//加入例句			
 	void Clear_History();         //清空查询历史 
 	void Add_History(std::string Word);        //加入查询历史
