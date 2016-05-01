@@ -11,7 +11,7 @@ int main()
 	fin.close();
 	User newuser(&temporary);
 	newuser.Change_Memory_times("wuhao", 6, 2);
-	cout<<newuser.Get_Memorized_Times("wuhao").first<<endl;
-	cout<<newuser.Get_Memorized_Times("wuhao").second<<endl;
+	Memory_Strategy temp_memory(&newuser, &temporary);
+	temp_memory.Get_Words_Queue();
 	return 0;
 }
