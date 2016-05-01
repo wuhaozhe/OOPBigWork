@@ -10,7 +10,8 @@ int main()
 	Database temporary(fin);
 	fin.close();
 	User newuser(&temporary);
-	Console console(&temporary, &newuser);
-	console.Run();
+	newuser.Change_Memory_times("wuhao", 6, 2);
+	cout<<newuser.Get_Memorized_Times("wuhao").first<<endl;
+	cout<<newuser.Get_Memorized_Times("wuhao").second<<endl;
 	return 0;
 }

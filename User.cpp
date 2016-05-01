@@ -364,3 +364,58 @@ void User::Change_Difficulty_Of_User(int Temp_difficulty)
 		fout<<temp_record[i]<<std::endl;
 	fout.close();
 }
+void User::Change_Memory_times(std::string Temp_Word, int Right_Times, int Recited_Times)
+{
+	std::pair<int, int> Temp_Pair = Get_Memorized_Times(Temp_Word);   //要同时修改map和文件!! 
+	if(Temp_Pair.first == 0 && Temp_Pair.second == 0)
+	{
+		Temp_Pair.first += Right_Times;
+		Temp_Pair.second += Recited_Times;
+		Memorized_Words_Times[Temp_Word] = Temp_Pair;
+		std::ofstream fout;
+		fout.open(User_Memorized_filename, std::ios::app);
+		fout<<Temp_Word<<" "<<Right_Times<<" "<<Recited_Times<<std::endl;
+		fout.close();
+	}
+	else
+	{
+		Temp_Pair.first = Right_Times;
+		Temp_Pair.second = Recited_Times;
+		Memorized_Words_Times[Temp_Word] = Temp_Pair;
+		std::vector<std::string> Temp_Record;
+		std::ifstream fin;
+		fin.open(User_Memorized_filename);
+		char temp_input[200] = {0};
+		Temp_Record.clear();
+		while(fin.getline(temp_input, 200))
+		{
+			std::string a = temp_input;
+			Temp_Record.push_back(a);
+			a.clear();
+			memset(temp_input, 0, sizeof(temp_input));
+		}
+		fin.close();
+		std::ofstream fout;
+		fout.open(User_Memorized_filename);
+		for(int i = 0; i < Temp_Record.size(); i++)
+		{
+			if(i <= 15)
+				fout<<Temp_Record[i]<<std::endl;
+			else
+			{
+				int p = 0;
+				std::string temp_get;
+				temp_get.clear();
+				while(Temp_Record[i][p] != ' ')
+				{
+					temp_get += Temp_Record[i][p];
+					p++;
+				}
+				if(temp_get != Temp_Word)
+					fout<<Temp_Record[i]<<std::endl;
+				else
+					fout<<temp_get<<" "<<Right_Times<<" "<<Recited_Times<<std::endl;
+			}
+		}
+	}
+}
