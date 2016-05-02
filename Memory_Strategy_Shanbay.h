@@ -5,5 +5,6 @@ class Memory_Strategy_Shanbay: public Memory_Strategy{
 public:
 	Memory_Strategy_Shanbay(User *temp_user, Database *temp_data);
 	Memory_Strategy_Shanbay() = default;
+	void Word_Factory(std::string Temp_Word);
 };
 #endif

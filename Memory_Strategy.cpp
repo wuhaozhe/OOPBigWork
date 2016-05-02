@@ -1,6 +1,9 @@
 #include "Memory_Strategy.h"
 Memory_Strategy::Memory_Strategy(User *temp_user, Database *temp_data): Current_User(temp_user), data(temp_data){
 	Difficulty = Current_User->Get_Difficulty();
+	Word_Num = 0;
+	Recited_Times = 0;
+	Right_Times = 0;
 }
 void Memory_Strategy::Get_Words_Queue()
 {
@@ -50,3 +53,65 @@ void Memory_Strategy::Get_Words_Queue()
 		}
 	}
 }
+void Memory_Strategy::After_Factory()
+{
+	std::string temp_first_word = Wanted_Words.front();
+	int temp_first_used = Whether_Used.front();
+	int temp_first_amount = Amount_Recited_Times.front();
+	Wanted_Words.pop();
+	Whether_Used.pop();
+	Amount_Recited_Times.pop();
+	if(temp_first_used == 0 && temp_first_amount < 3)
+	{
+		temp_first_amount++;
+		Wanted_Words.push(temp_first_word);
+		Whether_Used.push(0);
+		Amount_Recited_Times.push(temp_first_amount);
+	}
+}
+void Memory_Strategy::Run()
+{
+	std::cout<<"你今天希望背多少个单词？"<<std::endl;
+	std::string temp_input;
+	temp_input.clear();
+	int flag = 0;
+	do
+	{
+		flag = 0;
+		getline(std::cin, temp_input);
+		for(int i = 0; i < temp_input.size(); i++)
+			if(temp_input[i] < '0' || temp_input[i] > '9')
+			{
+				std::cout<<"输入错误"<<std::endl;
+				flag = 1;
+				temp_input.clear();
+				break;
+			}
+	}while(flag != 0);
+	for(int i = 0; i < temp_input.size(); i++)
+		Word_Num += (temp_input[i] - '0') * pow(10, temp_input.size() - i - 1);
+	Get_Words_Queue();
+	while(!Wanted_Words.empty())
+	{
+		Recited_Times++;
+		Word_Factory(Wanted_Words.front());
+		After_Factory();
+	}
+	if(Right_Times >= (Recited_Times * 0.9))
+	{
+		if(Current_User->Get_Difficulty() < 5)
+		{
+			int Temp_Difficulty = Current_User->Get_Difficulty() + 1;
+			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
+		}	
+	}
+	if(Right_Times <= (Recited_Times * 0.5))
+	{
+		if(Current_User->Get_Difficulty() > 1)
+		{
+			int Temp_Difficulty = Current_User->Get_Difficulty() - 1;
+			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
+		}	
+	}
+	std::cout<<"你今天与单词过招"<<Recited_Times<<"次"<<std::endl;
+}	
