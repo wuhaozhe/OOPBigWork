@@ -11,6 +11,7 @@ main: main.o $(OBJECTS)
 	g++ $(LD_FLAGS) -o $@ $^ $(LD_LIBS)
 	$(CP) dylib_database$(SLASH)libdata.$(Extension) .
 	$(CP) dylib_strategy$(SLASH)libstrategy.$(Extension) .
+	-mkdir User
 
 main.o: main.cpp $(HEADERS)
 	g++ $(CC_FLAGS) -o $@ -c $<

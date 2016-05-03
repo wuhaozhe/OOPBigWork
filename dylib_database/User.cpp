@@ -152,6 +152,8 @@ User::User(Database *temporary): wordslist(temporary)
 		int p = 0, found = 0;
 		do
 		{
+			p = 0;
+			found = 0;
 			std::cout<<get_out_console[15]<<std::endl;
 			char temporary1[100] = {0};
 			std::cin.getline(temporary1, 100);
@@ -163,20 +165,20 @@ User::User(Database *temporary): wordslist(temporary)
 			//#ifdef _WIN32
 			//	fin.open("User\\account.txt", std::ios::app);
 			//#else
-				fin.open("User/account.txt", std::ios::app);
+				fin.open("User/account.txt", std::ios::in);
 			//#endif
 			char temporary2[100] = {0};
 			while(fin.getline(temporary2, 100))
 			{
 				file_temp_name = temporary2;
-				if(p % 2 == 1)
+				if(p % 2 == 1) // password line
 				{
 					p++;
 					memset(temporary2, 0, sizeof(temporary2));
 					file_temp_name.clear();
 					continue;
 				}
-				else
+				else // username line
 				{
 					p++;
 					if(file_temp_name == temp_name)
