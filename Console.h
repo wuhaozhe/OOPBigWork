@@ -1,15 +1,16 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
-#include "database.h"
-#include "User.h"
-#include "Memory_Strategy.h"
-#include "Memory_Strategy_Shanbay.h"
-#include "Memory_Strategy_Towords.h"
-#include "NewWords_Strategy.h"
-#include "NewWords_Strategy1.h"
-#include "Test_Strategy.h"
-#include "Test_Strategy_TF.h"
-#include "Test_Strategy_Multi.h"
+#include <database.h>
+#include <fstream>
+#include <User.h>
+#include <Memory_Strategy.h>
+#include <Memory_Strategy_Shanbay.h>
+#include <Memory_Strategy_Towords.h>
+#include <NewWords_Strategy.h>
+#include <NewWords_Strategy1.h>
+#include <Test_Strategy.h>
+#include <Test_Strategy_TF.h>
+#include <Test_Strategy_Multi.h>
 class Console{
 private:
 	Database *data;
@@ -17,6 +18,7 @@ private:
 	Memory_Strategy *memory_strategy;       //记忆策略 1表示扇贝模式，2表示百词斩模式 
 	NewWords_Strategy *newwords_strategy;		//生词统计解释策略
 	Test_Strategy *test_strategy;       //在线单词测试策略 1.判断题，2.选择题 
+	std::vector<std::string> get_out_console;       //从文本中获得输出 
 	
 	void Change_Memory_Strategy();
 	

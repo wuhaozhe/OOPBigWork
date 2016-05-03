@@ -4,6 +4,19 @@ Memory_Strategy::Memory_Strategy(User *temp_user, Database *temp_data): Current_
 	Word_Num = 0;
 	Recited_Times = 0;
 	Right_Times = 0;
+	std::ifstream Fin;
+	#ifdef _WIN32
+		Fin.open("Memory_Strategy_Windows.txt");
+	#else
+		Fin.open("Memory_Strategy_linux.txt");
+	#endif
+	std::string get_in;
+	while(getline(Fin, get_in))
+	{
+		get_out_console.push_back(get_in);
+		get_in.clear();
+	}
+	Fin.close();
 }
 void Memory_Strategy::Get_Words_Queue()
 {
@@ -71,7 +84,7 @@ void Memory_Strategy::After_Factory()
 }
 void Memory_Strategy::Run()
 {
-	std::cout<<"你今天希望背多少个单词？"<<std::endl;
+	std::cout<<get_out_console[0]<<std::endl;
 	std::string temp_input;
 	temp_input.clear();
 	int flag = 0;
@@ -82,7 +95,7 @@ void Memory_Strategy::Run()
 		for(int i = 0; i < temp_input.size(); i++)
 			if(temp_input[i] < '0' || temp_input[i] > '9')
 			{
-				std::cout<<"输入错误"<<std::endl;
+				std::cout<<get_out_console[1]<<std::endl;
 				flag = 1;
 				temp_input.clear();
 				break;
@@ -113,5 +126,5 @@ void Memory_Strategy::Run()
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
 		}	
 	}
-	std::cout<<"你今天与单词过招"<<Recited_Times<<"次"<<std::endl;
+	std::cout<<get_out_console[2]<<Recited_Times<<get_out_console[3]<<std::endl;
 }	

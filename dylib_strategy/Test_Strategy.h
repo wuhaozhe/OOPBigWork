@@ -1,8 +1,9 @@
 #ifndef TEST_WORDS_STRATEGY
 #define TEST_WORDS_STRATEGY
-#include "database.h"
-#include "User.h"
+#include <database.h>
+#include <User.h>
 class Test_Strategy{
+	std::vector<std::string> get_out_console;
 public:
 	const int times;
 	Database *data;

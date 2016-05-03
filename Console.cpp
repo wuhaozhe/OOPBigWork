@@ -1,7 +1,7 @@
 #include <cstring>
 #include "Console.h"
 void Console::Change_Memory_Strategy(){
-	std::cout << "Which memory strategy do you want? 1.Shanbay mode 2.Towords mode" << std::endl;
+	std::cout << get_out_console[0] << std::endl;
 	char Temp[200];
 	std::cin.getline(Temp, 200);
 	if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
@@ -15,24 +15,24 @@ void Console::Change_Memory_Strategy(){
 				break;
 		}
 	}
-	else std::cout << "No such strategy." << std::endl;
+	else std::cout << get_out_console[1] << std::endl;
 }
 std::string Console::Get_Word(std::string Temp_Word){
 	return data->Get_Chinese(Temp_Word);
 }
 void Console::Show_Search_History(){
 	std::vector<std::string>History = Current_User->Get_Search_History();
-	if (History.size() == 0) std::cout << "No search history yet." << std::endl;
+	if (History.size() == 0) std::cout << get_out_console[2] << std::endl;
 	else{
-		std::cout << "Last " << History.size() << " search history:" << std::endl;
-		for (int i = 0; i < (int)History.size(); ++i) std::cout << History[i] << std::endl;
+		std::cout << get_out_console[3] << History.size() << get_out_console[4] << std::endl;
+		for (int i = (int)History.size() - 1; i >= 0; --i) std::cout << History[i] << std::endl;
 	}
 }
 void Console::Search(){
 	while (1){
-		std::cout << "What do you want to do?" << std::endl << "0.Search Word" << std::endl
-		<< "1.Get Search History" << std::endl << "2.Clear Search History" << std::endl
-		<< "3.Exit" << std::endl;
+		std::cout << get_out_console[5] << std::endl << get_out_console[6] << std::endl
+		<< get_out_console[7] << std::endl << get_out_console[8] << std::endl
+		<< get_out_console[9] << std::endl;
 		char Temp[200]; std::string Temp_Word, Chinese;
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1){
@@ -40,7 +40,7 @@ void Console::Search(){
 				case '0':
 					std::cin.getline(Temp, 200); Temp_Word = Temp;
 					Chinese = data->Get_Chinese(Temp_Word);
-					if (Chinese == "") std::cout << "No such Word." << std::endl;
+					if (Chinese == "") std::cout << get_out_console[10] << std::endl;
 					else std::cout << Chinese << std::endl;
 					Current_User->Add_History(Temp_Word);
 					break;
@@ -58,7 +58,7 @@ void Console::Search(){
 }
 void Console::Test(){
 	while (1){
-		std::cout << "Which test mode do you want? 1.T/F 2.multiple-choice 3.Exit" << std::endl;
+		std::cout << get_out_console[11] << std::endl;
 		char Temp[200];
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '3'){
@@ -81,6 +81,19 @@ void Console::NewWords(){
 	newwords_strategy->Run();
 }
 Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
+	std::ifstream fin;
+	#ifdef _WIN32
+		fin.open("Console_Windows.txt");
+	#else
+		fin.open("Console_linux.txt");
+	#endif
+	std::string get_in;
+	while(getline(fin, get_in))
+	{
+		get_out_console.push_back(get_in);
+		get_in.clear();
+	}
+	fin.close();
 	switch (Current_User->Get_Memory_Strategy()){
 		case 1:
 			memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
@@ -92,10 +105,10 @@ Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_
 }
 void Console::Run(){
 	while (1){
-		std::cout << "What do you want to do?" << std::endl << "1.Memory words" << std::endl
-		<< "2.Search words" << std::endl << "3.Test your vocabulary" << std::endl
-		<< "4.Statistics of new words" << std::endl << "5.Change memory strategy" << std::endl
-		<< "6.Exit" << std::endl;
+		std::cout << get_out_console[12] << std::endl << get_out_console[13] << std::endl
+		<< get_out_console[14] << std::endl << get_out_console[15] << std::endl
+		<< get_out_console[16] << std::endl << get_out_console[17] << std::endl
+		<< get_out_console[18] << std::endl;
 		char Temp[200];
 		std::cin.getline(Temp, 200);
 		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '6'){

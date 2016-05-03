@@ -31,15 +31,28 @@ std::map<std::string, std::pair<int, int>> User::Whole_Memorized_Words()
 
 User::User(Database *temporary): wordslist(temporary)
 {
+	std::ifstream Fin;
+	#ifdef _WIN32
+		Fin.open("User_Windows.txt");
+	#else
+		Fin.open("User_linux.txt");
+	#endif
+	std::string get_in;
+	while(getline(Fin, get_in))
+	{
+		get_out_console.push_back(get_in);
+		get_in.clear();
+	}
+	Fin.close();
 	std::string temp_name;
 	std::string temp_password;
 	char flag[100] = {0};
-	std::cout<<"未注册， 请按1"<<std::endl;
-	std::cout<<"已注册， 请按2"<<std::endl;
+	std::cout<<get_out_console[0]<<std::endl;
+	std::cout<<get_out_console[1]<<std::endl;
 	std::cin.getline(flag, 100);
 	while(!(strlen(flag) == 1 && (flag[0] == '1' || flag[0] == '2')))
 	{
-		std::cout<<"输入错误，请重新输入"<<std::endl;
+		std::cout<<get_out_console[2]<<std::endl;
 		memset(flag, 0, sizeof(flag)); 
 		std::cin.getline(flag, 100);
 	}
@@ -49,71 +62,69 @@ User::User(Database *temporary): wordslist(temporary)
 		std::string name;
 		std::string password;
 		std::ofstream fout;        //此处没有管mac, 需要改动 
-		#ifdef linux
-			fout.open("User/account.txt", std::ios::app);
-		#endif
 		#ifdef _WIN32
 			fout.open("User\\account.txt", std::ios::app);
+		#else
+			fout.open("User/account.txt", std::ios::app);
 		#endif
-		std::cout<<"请输入用户名" <<std::endl;
+		std::cout<<get_out_console[3] <<std::endl;
 		char temporarya[100] = {0};
 		std::cin.getline(temporarya, 100);
 		temp = temporarya;
 		name = temp;
 		fout<<temp<<std::endl;
-		std::cout<<"请输入密码"<<std::endl;
+		std::cout<<get_out_console[4]<<std::endl;
 		char temporaryb[100] = {0};
 		std::cin.getline(temporaryb, 100);
 		password = temporaryb;
 		fout<<password<<std::endl;
 		fout.close();
 		std::string filename;
-		#ifdef linux
-			filename = "User/";
-		#endif
 		#ifdef _WIN32
 			filename = "User\\";
+		#else
+			filename = "User/";
 		#endif
 		filename += name;
 		filename += "MemorizedWords.txt";
 		User_Memorized_filename = filename;
 		fout.open(filename);
 		temp.clear();
-		std::cout<<"请确认密码"<<std::endl;
+		std::cout<<get_out_console[5]<<std::endl;
 		char temporaryc[100] = {0};
 		std::cin.getline(temporaryc, 100);
 		temp = temporaryc;
 		while(temp != password)
 		{
-			std::cout<<"输入错误，请重新输入"<<std::endl;
+			std::cout<<get_out_console[6]<<std::endl;
 			temp.clear();
 			char temporaryd[100] = {0};
 			std::cin.getline(temporaryd, 100);
 			temp = temporaryd;
 		}
 		
-		std::cout<<"你希望选择的难度"<<std::endl;
-		std::cout<<"1. 简单，2. 一般，3. 较难，4. 难， 5. 地狱模式"<<std::endl;
-		std::cout<<"请输入难度所对应的数字"<<std::endl;
+		std::cout<<get_out_console[7]<<std::endl;
+		std::cout<<get_out_console[8]<<std::endl;
+		std::cout<<get_out_console[9]<<std::endl;
 		memset(flag, 0, sizeof(flag));
 		std::cin.getline(flag, sizeof(flag));
 		while(!(strlen(flag) == 1 && flag[0] >= '1' && flag[0] <= '5'))
 		{
-			std::cout<<"输入错误，请重新输入"<<std::endl;
+			std::cout<<get_out_console[10]<<std::endl;
 			memset(flag, 0, sizeof(flag)); 
 			std::cin.getline(flag, sizeof(flag));
 		}
 		char b1 = flag[0];
 		Difficulty_Of_User = (flag[0] - '0');
 		
-		std::cout<<"你希望选择的背单词模式"<<std::endl;
-		std::cout<<"1. 扇贝模式， 2. 百词斩模式"<<std::endl;
-		std::cout<<"请输入模式所对应的数字"<<std::endl;
+		std::cout<<get_out_console[11]<<std::endl;
+		std::cout<<get_out_console[12]<<std::endl;
+		std::cout<<get_out_console[13]<<std::endl;
 		memset(flag, 0, sizeof(flag));
 		std::cin.getline(flag, sizeof(flag));
 		while(!(strlen(flag) == 1 && flag[0] >= '1' && flag[0] <= '2'))
 		{
-			std::cout<<"输入错误，请重新输入"<<std::endl;
+			std::cout<<get_out_console[14]<<std::endl;
 			memset(flag, 0, sizeof(flag)); 
 			std::cin.getline(flag, sizeof(flag));
 		}
@@ -122,11 +133,10 @@ User::User(Database *temporary): wordslist(temporary)
 		for(int i = 1; i <= 16; i++)
 			fout<<std::endl;
 		fout.close();
-		#ifdef linux
-			filename = "User/";
-		#endif
 		#ifdef _WIN32
 			filename = "User\\";
+		#else
+			filename = "User/";
 		#endif
 		filename += name;
 		filename += "Examples.txt";
@@ -142,19 +152,18 @@ User::User(Database *temporary): wordslist(temporary)
 		int p = 0, found = 0;
 		do
 		{
-			std::cout<<"请输入用户名"<<std::endl;
+			std::cout<<get_out_console[15]<<std::endl;
 			char temporary1[100] = {0};
 			std::cin.getline(temporary1, 100);
 			temp_name = temporary1;
-			std::cout<<"请输入密码"<<std::endl;
+			std::cout<<get_out_console[16]<<std::endl;
 			memset(temporary1, 0, sizeof(temporary1));
 			std::cin.getline(temporary1, 100);
 			temp_password = temporary1;
-			#ifdef linux
-				fin.open("User/account.txt", std::ios::app);
-			#endif
 			#ifdef _WIN32
 				fin.open("User\\account.txt", std::ios::app);
+			#else
+				fin.open("User/account.txt", std::ios::app);
 			#endif
 			char temporary2[100] = {0};
 			while(fin.getline(temporary2, 100))
@@ -182,23 +191,22 @@ User::User(Database *temporary): wordslist(temporary)
 			}
 			if(found != 0 && (file_temp_password == temp_password))
 			{
-				std::cout<<"登录成功！"<<std::endl;
+				std::cout<<get_out_console[17]<<std::endl;
 				break;
 			}
 			else
 			{
-				std::cout<<"该用户不存在或密码输入错误"<<std::endl;
+				std::cout<<get_out_console[18]<<std::endl;
 				fin.close();
 			}
 		}while(found == 0 || file_temp_password != temp_password);
 	}
 	std::ifstream fin;         //从这开始读入用户文件中的例句等各种信息 
 	std::string temp_filename;
-	#ifdef linux
-		temp_filename += "User/"; 
-	#endif
 	#ifdef _WIN32
 		temp_filename += "User\\";
+	#else
+		temp_filename += "User/"; 
 	#endif
 	temp_filename += temp_name;
 	std::string filename_one = temp_filename;

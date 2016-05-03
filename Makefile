@@ -1,27 +1,31 @@
-CPPFLAG = -std=c++11
+include config.make
 
-all: temporary.exe
+CC_FLAGS = -I./dylib_database -I./dylib_strategy -std=c++11
+LD_FLAGS = -L./dylib_database -L./dylib_strategy
+LD_LIBS = -lstrategy -ldata
 
-temporary.exe: temporary.o Database.o Single_Word.o User.o Memory_Strategy.o Memory_Strategy_Towords.o
-	g++ -o temporary.exe $^ $(CPPFLAG)
+.PHONY: all
+all: libdata libstrategy main
 
-temporary.o: temporary.cpp
-	g++ -c $< $(CPPFLAG)
+main: main.o $(OBJECTS)
+	g++ $(LD_FLAGS) -o $@ $^ $(LD_LIBS)
+	$(CP) dylib_database$(SLASH)libdata.$(Extension) .
+	$(CP) dylib_strategy$(SLASH)libstrategy.$(Extension) .
 
-Database.o: Database.cpp
-	g++ -c $< $(CPPFLAG)
+main.o: main.cpp $(HEADERS)
+	g++ $(CC_FLAGS) -o $@ -c $<
 
-Single_Word.o: Single_Word.cpp
-	g++ -c $< $(CPPFLAG)
+%.o: %.cpp %.h
+	g++ $(CC_FLAGS) -o $@ -c $<
 
-User.o: User.cpp
-	g++ -c $< $(CPPFLAG)
+libdata:
+	cd dylib_database && make
 
-Memory_Strategy.o: Memory_Strategy.cpp
-	g++ -c $< $(CPPFLAG)
+libstrategy:
+	cd dylib_strategy && make
 
-Memory_Strategy_Towords.o: Memory_Strategy_Towords.cpp
-	g++ -c $< $(CPPFLAG)
-
+.PHONY: clean
 clean:
-	del *.o *.exe
+	$(RM) *.o main libdata.$(Extension) libstrategy.$(Extension)
+	cd dylib_strategy && make clean
+	cd dylib_database && make clean

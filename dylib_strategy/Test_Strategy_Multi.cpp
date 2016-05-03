@@ -15,7 +15,7 @@ bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
 		}
 		std::cout << std::endl;
 	}
-	std::cout << "Press A or B or C or D" << std::endl;
+	std::cout << "please choose A B C or D" << std::endl;
 	char Temp[200];
 	while (1){
 		std::cin.getline(Temp, 200);
@@ -29,4 +29,5 @@ bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
 	return (answer == Temp1);
 }
 Test_Strategy_Multi::Test_Strategy_Multi(Database *temp_data): Test_Strategy(temp_data){
+	
 }

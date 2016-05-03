@@ -1,7 +1,7 @@
 #ifndef MEMORY_STRATEGY
 #define MEMORY_STRATEGY
-#include "User.h"
-#include "Database.h"
+#include <User.h>
+#include <Database.h>
 #include <ctime>
 #include <queue>
 #include <cstdlib>
@@ -12,6 +12,7 @@ class Memory_Strategy{
 	std::queue<int> Amount_Recited_Times;    //该单词背诵次数 
 	int Word_Num;          //用户需要的单词个数
 	int Difficulty;           //用户设定难度 
+	std::vector<std::string> get_out_console;
 public:
 	float Recited_Times;
 	float Right_Times;

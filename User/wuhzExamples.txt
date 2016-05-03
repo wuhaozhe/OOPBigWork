@@ -1,9 +1,1 @@
-crane hello, crane
-gaudy I am gaudy
-pin big pin!
-crane big crane!
-gaudy you are gaudy!
-abacus I am good at using abacus
-halcyon aa halcyon
-sift sift carefully
-interrogate hello
+ham aaa

@@ -18,6 +18,7 @@ private:
 	Database *wordslist;
 	std::string User_Memorized_filename;
 	std::string User_Examples_filename;
+	std::vector<std::string> get_out_console; 
 public:
 	int Get_Difficulty();         //获得用户设定难度 
 	int Get_Memory_Strategy();		//获得记忆策略 

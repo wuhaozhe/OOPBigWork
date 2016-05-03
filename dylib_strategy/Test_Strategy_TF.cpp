@@ -11,7 +11,7 @@ bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
 		}
 		std::cout << data->Get_Chinese(data->Get_English(Temp2)) << std::endl;
 	}
-	std::cout << "Press t for true or f for false" << std::endl;
+	std::cout << "choose t means true, f means false" << std::endl;
 	char Temp[200];
 	while (1){
 		std::cin.getline(Temp, 200);

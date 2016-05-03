@@ -1,4 +1,8 @@
-1 2
+2 2
+amuse
+foolish
+big
+is
 
 
 
@@ -10,29 +14,13 @@
 
 
 
-
-
-
-
-crane 3 10
-gaudy 2 6
-handily 5 6
-blunt 4 5
-demerit 6 7
-wuhao 6 2
-haha 3 5
-hehe 4 5
-gaga 4 7
-popo 2 10
-magnetize 4 5
-questionnaire 4 4
-pin 3 5
-bonus 5 5
-interrogate 3 5
-halcyon 3 5
-sift 3 4
-ponderous 2 4
-misrule 2 4
-snuffle 1 4
-militia 0 4
-jaunty 1 4
+ham 4 5
+escort 3 5
+tragedy 4 4
+performer 4 5
+shrug 4 4
+rug 4 4
+chimney 5 5
+hostility 5 5
+pin 4 5
+worsen 0 1

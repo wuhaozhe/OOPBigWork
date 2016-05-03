@@ -13,9 +13,9 @@ void NewWords_Strategy::Run(){
 		if (Temp_Word != ""){
 			if (!(data->Exist(Temp_Word)) || (data->Get_Difficulty(Temp_Word) > Current_User->Get_Difficulty() && Current_User->Get_Memorized_Times(Temp_Word).first == 0)){
 				if (List.count(Temp_Word) == 0){
-					std::cout << "New Word: " << Temp_Word << std::endl;
+					std::cout <<get_out_console[0] << Temp_Word << std::endl;
 					if (data->Exist(Temp_Word)) std::cout << data->Get_Chinese(Temp_Word) << std::endl;
-					else std::cout << "Sorry, explanation can't be found." << std::endl;
+					else std::cout << get_out_console[1] << std::endl;
 					List.insert(Temp_Word);
 				}
 			}
@@ -25,4 +25,17 @@ void NewWords_Strategy::Run(){
 	List.clear();
 }
 NewWords_Strategy::NewWords_Strategy(User *temp_user, Database *temp_data): Current_User(temp_user), data(temp_data){
+	std::ifstream fin;
+	#ifdef _WIN32
+		fin.open("NewWords_Strategy_Windows.txt");
+	#else
+		fin.open("NewWords_Strategy_linux.txt");
+	#endif
+	std::string get_in;
+	while(getline(fin, get_in))
+	{
+		get_out_console.push_back(get_in);
+		get_in.clear();
+	}
+	fin.close();
 }
