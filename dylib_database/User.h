@@ -8,7 +8,7 @@
 #include <map>
 #include <utility>
 #include <memory.h>
-#include "database.h"
+#include "Database.h"
 class User{
 private:
 	std::vector<std::string> Search_History;       //²éÑ¯ÀúÊ· 

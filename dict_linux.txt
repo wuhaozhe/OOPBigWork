@@ -1,4 +1,4 @@
-﻿3abacus "n.算盘"
+3abacus "n.算盘"
 3abandon "vt.放弃,遗弃n.放任,狂热"
 4abandonment "n.放弃"
 3abase "v.降低"

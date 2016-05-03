@@ -2,9 +2,9 @@
 #include "Console.h"
 void Console::Change_Memory_Strategy(){
 	std::cout << get_out_console[0] << std::endl;
-	char Temp[200];
-	std::cin.getline(Temp, 200);
-	if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
+	std::string Temp;
+	getline(std::cin, Temp);
+	if (Temp.size() == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
 		Current_User->Change_Memory_Strategy_Number(Temp[0]-'0');
 		switch (Temp[0]){
 			case '1':

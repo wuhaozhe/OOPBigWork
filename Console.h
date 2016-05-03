@@ -1,6 +1,6 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
-#include <database.h>
+#include <Database.h>
 #include <fstream>
 #include <User.h>
 #include <Memory_Strategy.h>

@@ -1,7 +1,7 @@
 include ../config.make
 LD_FLAG = -L../dylib_database
 LD_LIB = -ldata
-CC_FLAG = -I../dylib_database -std=c++11
+CC_FLAG = -I../dylib_database -std=c++11 -fPIC
 
 
 .PHONY: all

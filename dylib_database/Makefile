@@ -1,6 +1,6 @@
 include ../config.make
 
-FLAGS = -std=c++11
+FLAGS = -std=c++11 -fPIC
 
 .PHONY: all
 all: libdata.$(Extension)

@@ -1,6 +1,6 @@
 #ifndef TEST_WORDS_STRATEGY
 #define TEST_WORDS_STRATEGY
-#include <database.h>
+#include <Database.h>
 #include <User.h>
 class Test_Strategy{
 	std::vector<std::string> get_out_console;

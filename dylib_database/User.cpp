@@ -62,11 +62,11 @@ User::User(Database *temporary): wordslist(temporary)
 		std::string name;
 		std::string password;
 		std::ofstream fout;        //此处没有管mac, 需要改动 
-		#ifdef _WIN32
-			fout.open("User\\account.txt", std::ios::app);
-		#else
+		//#ifdef _WIN32
+		//	fout.open("User\\account.txt", std::ios::app);
+		//#else
 			fout.open("User/account.txt", std::ios::app);
-		#endif
+		//#endif
 		std::cout<<get_out_console[3] <<std::endl;
 		char temporarya[100] = {0};
 		std::cin.getline(temporarya, 100);
@@ -80,11 +80,11 @@ User::User(Database *temporary): wordslist(temporary)
 		fout<<password<<std::endl;
 		fout.close();
 		std::string filename;
-		#ifdef _WIN32
-			filename = "User\\";
-		#else
+		//#ifdef _WIN32
+		//	filename = "User\\";
+		//#else
 			filename = "User/";
-		#endif
+		//#endif
 		filename += name;
 		filename += "MemorizedWords.txt";
 		User_Memorized_filename = filename;
@@ -133,11 +133,11 @@ User::User(Database *temporary): wordslist(temporary)
 		for(int i = 1; i <= 16; i++)
 			fout<<std::endl;
 		fout.close();
-		#ifdef _WIN32
-			filename = "User\\";
-		#else
+		//#ifdef _WIN32
+		//	filename = "User\\";
+		//#else
 			filename = "User/";
-		#endif
+		//#endif
 		filename += name;
 		filename += "Examples.txt";
 		User_Examples_filename = filename;
@@ -160,11 +160,11 @@ User::User(Database *temporary): wordslist(temporary)
 			memset(temporary1, 0, sizeof(temporary1));
 			std::cin.getline(temporary1, 100);
 			temp_password = temporary1;
-			#ifdef _WIN32
-				fin.open("User\\account.txt", std::ios::app);
-			#else
+			//#ifdef _WIN32
+			//	fin.open("User\\account.txt", std::ios::app);
+			//#else
 				fin.open("User/account.txt", std::ios::app);
-			#endif
+			//#endif
 			char temporary2[100] = {0};
 			while(fin.getline(temporary2, 100))
 			{
@@ -203,11 +203,11 @@ User::User(Database *temporary): wordslist(temporary)
 	}
 	std::ifstream fin;         //从这开始读入用户文件中的例句等各种信息 
 	std::string temp_filename;
-	#ifdef _WIN32
-		temp_filename += "User\\";
-	#else
+	//#ifdef _WIN32
+	//	temp_filename += "User\\";
+	//#else
 		temp_filename += "User/"; 
-	#endif
+	//#endif
 	temp_filename += temp_name;
 	std::string filename_one = temp_filename;
 	filename_one += "MemorizedWords.txt";
