@@ -165,7 +165,7 @@ User::User(Database *temporary): wordslist(temporary)
 			//#ifdef _WIN32
 			//	fin.open("User\\account.txt", std::ios::app);
 			//#else
-				fin.open("User/account.txt", std::ios::in);
+				fin.open("User/account.txt");
 			//#endif
 			char temporary2[100] = {0};
 			while(fin.getline(temporary2, 100))

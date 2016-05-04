@@ -20,14 +20,14 @@ Memory_Strategy(temp_user, temp_data){
 void Memory_Strategy_Towords::Word_Factory(std::string Temp_Word)
 {
 	std::cout<<Temp_Word<<std::endl;
-	int index[3] = {0};
-	for(int i = 0; i < 3; i++)
+	int index[4] = {0};
+	for(int i = 0; i < 4; i++)
 	{
 		int temp_flag = 0;
 		do
 		{
 			index[i] = rand() % data->Get_Words_Size();
-			for(int j = 0; j < temp_flag; j++)
+			for(int j = 0; j < i; j++)
 			{
 				if(index[j] == index[i] || data->Get_English(index[j]) == Temp_Word)
 					temp_flag = 1;
@@ -40,7 +40,8 @@ void Memory_Strategy_Towords::Word_Factory(std::string Temp_Word)
 		if(i == seq)
 			std::cout<<char(65 + i)<<'.'<<data->Get_Chinese(Temp_Word)<<std::endl;
 		else
-			std::cout<<char(65 + i)<<'.'<<data->Get_Chinese(data->Get_English(index[i]))<<std::endl;	
+			std::cout<<char(65 + i)<<'.'<<data->Get_Chinese(data->Get_English(index[i]))<<std::endl;
+			
 	}
 	std::string temp_input;
 	temp_input.clear();

@@ -17,6 +17,7 @@ Memory_Strategy::Memory_Strategy(User *temp_user, Database *temp_data): Current_
 		get_in.clear();
 	}
 	Fin.close();
+	std::cout<<get_out_console[0]<<" "<<get_out_console[1]<<" "<<get_out_console[2]<<" "<<get_out_console[3]<<std::endl;
 }
 void Memory_Strategy::Get_Words_Queue()
 {
