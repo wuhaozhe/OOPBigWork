@@ -19,7 +19,7 @@ public:
 	Database *data;
 	void Get_Words_Queue();         //获得要背单词的队列 
 	void After_Factory();           //对该单词进行各种信息改动 
-	std::string Run();
+	void Run();
 	
 	void Init(int Temp);
 	bool Exist();

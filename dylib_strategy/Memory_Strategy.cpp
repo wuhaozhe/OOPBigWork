@@ -69,22 +69,22 @@ void Memory_Strategy::After_Factory()
 		Amount_Recited_Times.push(temp_first_amount);
 	}
 }
-std::string Memory_Strategy::Run()
+void Memory_Strategy::Run()
 {
 	if(Right_Times >= (Recited_Times * 0.9))
 	{
-		if(Current_User->Get_Difficulty() < 5)
+		if(Difficulty < 5)
 		{
-			int Temp_Difficulty = Current_User->Get_Difficulty() + 1;
+			int Temp_Difficulty = Difficulty + 1;
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
 			Difficulty = Temp_Difficulty;
 		}
 	}
 	if(Right_Times <= (Recited_Times * 0.5))
 	{
-		if(Current_User->Get_Difficulty() > 1)
+		if(Difficulty > 1)
 		{
-			int Temp_Difficulty = Current_User->Get_Difficulty() - 1;
+			int Temp_Difficulty = Difficulty - 1;
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
 			Difficulty = Temp_Difficulty;
 		}	

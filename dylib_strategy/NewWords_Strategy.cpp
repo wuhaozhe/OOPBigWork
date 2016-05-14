@@ -15,9 +15,10 @@ std::string NewWords_Strategy::Run(std::string filename){
 			if (!(data->Exist(Temp_Word)) || (data->Get_Difficulty(Temp_Word) > Current_User->Get_Difficulty() && 
 			Current_User->Get_Memorized_Times(Temp_Word).first == 0)){
 				if (List.count(Temp_Word) == 0){
-					Left += get_out_console[0] + Temp_Word + "\n";
-					if (data->Exist(Temp_Word)) Left += data->Get_Chinese(Temp_Word);
-					else Left += get_out_console[1];
+					if (Left == "") Left += get_out_console[0];
+					else Left += "\n" + get_out_console[0] + Temp_Word;
+					if (data->Exist(Temp_Word)) Left += "\n" + data->Get_Chinese(Temp_Word);
+					else Left += "\n" + get_out_console[1];
 					List.insert(Temp_Word);
 				}
 			}
