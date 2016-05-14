@@ -19,7 +19,8 @@ Memory_Strategy(temp_user, temp_data){
 }
 std::string Memory_Strategy_Towords::Get_Query(){
 	Recited_Times++; std::string Query; Query.clear();
-	Temp_Word = Wanted_Words.front();
+	std::string Temp_Word;
+	Temp_Word = First_Word();
 	Query += Temp_Word + "\n";
 	int index[4] = {0};
 	for(int i = 0; i < 4; i++)
@@ -39,39 +40,43 @@ std::string Memory_Strategy_Towords::Get_Query(){
 	for(int i = 0; i < 4; i++)
 	{
 		if(i == seq)
-			Query += char(65 + i) + '.' + data->Get_Chinese(Temp_Word);
+		{
+			Query += char(65 + i); Query += '.'; Query += data->Get_Chinese(Temp_Word);
+		}
 		else
-			Query += char(65 + i) + '.' + data->Get_Chinese(data->Get_English(index[i]));
+		{
+			Query += char(65 + i); Query += '.'; Query += data->Get_Chinese(data->Get_English(index[i]));
+		}
 		if (i < 3) Query += "\n";
 	}
 	return Query;
 }
 bool Memory_Strategy_Towords::Check(std::string Temp){
-	return Temp.size() == 1 && 'A' <= Temp[0] && 'D' >= Temp[0]);
+	return (Temp.size() == 1 && 'A' <= Temp[0] && 'D' >= Temp[0]);
 }
 std::string Memory_Strategy_Towords::Work(std::string Ans){
 	std::string Temp_ans; Temp_ans.clear();
-	if(int(Ans[0] - 'A') != seq)   //wrong
+	if(int(Ans[0] - 'A') != answer)   //wrong
 	{
-		int temp_right_times = (Current_User->Get_Memorized_Times(Temp_Word).first);
-		int temp_whole_times = (Current_User->Get_Memorized_Times(Temp_Word).second);
+		int temp_right_times = (Current_User->Get_Memorized_Times(First_Word()).first);
+		int temp_whole_times = (Current_User->Get_Memorized_Times(First_Word()).second);
 		temp_whole_times++;
-		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
-		Temp_ans += get_out_console[1] + char(seq + 65) + "\n";
-		Temp_ans += get_out_console[2] + data->Get_Chinese(Temp_Word) + "\n";
+		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
+		Temp_ans += get_out_console[1] + char(answer + 65) + "\n";
+		Temp_ans += get_out_console[2] + data->Get_Chinese(First_Word()) + "\n";
 		Temp_ans += get_out_console[3];
-		for(int i = 0; i < (int)data->Get_Examples(Temp_Word).size(); i++)
-			Temp_ans += "\n" + data->Get_Examples(Temp_Word)[i];
+		for(int i = 0; i < (int)data->Get_Examples(First_Word()).size(); i++)
+			Temp_ans += "\n" + data->Get_Examples(First_Word())[i];
 	}
 	else    //right
 	{
 		Temp_ans += get_out_console[7];
 		Right_Times++;
-		int temp_right_times = (Current_User->Get_Memorized_Times(Temp_Word).first);
-		int temp_whole_times = (Current_User->Get_Memorized_Times(Temp_Word).second);
+		int temp_right_times = (Current_User->Get_Memorized_Times(First_Word()).first);
+		int temp_whole_times = (Current_User->Get_Memorized_Times(First_Word()).second);
 		temp_right_times++;
 		temp_whole_times++;
-		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
+		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
 		return Temp_ans;
 	}
 }

@@ -19,34 +19,34 @@ Memory_Strategy_Shanbay::Memory_Strategy_Shanbay(User *temp_user, Database *temp
 }
 std::string Memory_Strategy_Shanbay::Get_Query(){
 	Recited_Times++; std::string Query; Query.clear();
-	Temp_Word = Wanted_Words.front();
-	Query += Temp_Word + "\n" + get_out_console[0] + "\n" + get_out_console[1];
+	Query += First_Word() + "\n" + get_out_console[0] + "\n" + get_out_console[1];
 	return Query;
 }
 bool Memory_Strategy_Shanbay::Check(std::string Temp){
 	return Temp.size() == 1 && (Temp[0] == 'Y' || Temp[0] == 'N');
 }
-void Memory_Strategy_Shanbay::Work(std::string Ans){
+std::string Memory_Strategy_Shanbay::Work(std::string Ans){
 	std::string Temp_ans; Temp_ans.clear();
 	if(Ans[0] == 'N')
 	{
-		int temp_right_times = (Current_User->Get_Memorized_Times(Temp_Word).first);
-		int temp_whole_times = (Current_User->Get_Memorized_Times(Temp_Word).second);
+		int temp_right_times = (Current_User->Get_Memorized_Times(First_Word()).first);
+		int temp_whole_times = (Current_User->Get_Memorized_Times(First_Word()).second);
 		temp_whole_times++;
-		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
-		Temp_ans +=  data->Get_Chinese(Temp_Word) + "\n" + get_out_console[3];
-		for(int i = 0; i < (int)data->Get_Examples(Temp_Word).size(); i++)
-			Temp_ans += "\n" + data->Get_Examples(Temp_Word)[i];
+		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
+		Temp_ans +=  data->Get_Chinese(First_Word()) + "\n" + get_out_console[3];
+		for(int i = 0; i < (int)data->Get_Examples(First_Word()).size(); i++)
+			Temp_ans += "\n" + data->Get_Examples(First_Word())[i];
 		return Temp_ans;
 	}
 	else
 	{
 		Right_Times++;
-		int temp_right_times = (Current_User->Get_Memorized_Times(Temp_Word).first);
-		int temp_whole_times = (Current_User->Get_Memorized_Times(Temp_Word).second);
+		int temp_right_times = (Current_User->Get_Memorized_Times(First_Word()).first);
+		int temp_whole_times = (Current_User->Get_Memorized_Times(First_Word()).second);
 		temp_right_times++;
 		temp_whole_times++;
-		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
-		return "";
+		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
+		Temp_ans += get_out_console[3];
+		return Temp_ans;
 	}
 }

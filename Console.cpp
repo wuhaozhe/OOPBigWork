@@ -9,10 +9,16 @@ void Console::Change_Memory_Strategy(){
 		Current_User->Change_Memory_Strategy_Number(Temp[0]-'0');
 		switch (Temp[0]){
 			case '1':
-				memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
+				{
+					delete memory_strategy;
+					memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
+				}
 				break;
 			case '2':
-				memory_strategy = new Memory_Strategy_Towords(Current_User, data);
+				{
+					delete memory_strategy;
+					memory_strategy = new Memory_Strategy_Towords(Current_User, data);
+				}
 				break;
 		}
 	}
@@ -271,9 +277,9 @@ Console::Console(Database *temp_data, Output *temp_out):data(temp_data), Current
 	fin.close();
 }
 void Console::Memory(){
-	Memory_Strategy->Recited_Times = 0;
-	Memory_Strategy->Right_Times = 0;
-	Out->Print(get_out_console[0]);
+	memory_strategy->Recited_Times = 0;
+	memory_strategy->Right_Times = 0;
+	Out->Print(get_out_console[38]);
 	std::string temp_input;
 	temp_input.clear();
 	int flag = 0;
@@ -284,48 +290,48 @@ void Console::Memory(){
 		for(int i = 0; i < temp_input.size(); i++)
 			if(temp_input[i] < '0' || temp_input[i] > '9')
 			{
-				Out->Print(get_out_console[1]);
+				Out->Print(get_out_console[39]);
 				flag = 1;
 				temp_input.clear();
 				break;
 			}
 	}while(flag != 0);
-	Word_Num = 0;
+	int Word_Num = 0;
 	for(int i = 0; i < temp_input.size(); i++)
 		Word_Num += (temp_input[i] - '0') * pow(10, temp_input.size() - i - 1);
-	Memory_Strategy->Init(Word_Num);	
-	while(Memory_Strategy->Exist())
+	memory_strategy->Init(Word_Num);	
+	while(memory_strategy->Exist())
 	{
-		Out->Print(Memory_Strategy->GetQuery());
+		Out->Print(memory_strategy->Get_Query());      //获得题目 
 		temp_input.clear();
 		getline(std::cin, temp_input);
-		while (!Memory_Strategy->Check(temp_input)){
-			Out->Print(get_out_console[2]);
+		while (!memory_strategy->Check(temp_input)){
+			Out->Print(get_out_console[42]);
 			temp_input.clear(); getline(std::cin, temp_input);
 		}
-		Out->Print(Memory_Strategy->Run(temp_input));
-		Out->Print(get_out_console[4]);
+		Out->Print(memory_strategy->Work(temp_input));
+		Out->Print(get_out_console[43]);         //是否希望加入例句 
 		temp_input.clear();
 		getline(std::cin, temp_input);
 		while(!(temp_input.size() == 1 && (temp_input[0] == 'Y' || temp_input[0] == 'N')))
 		{
-			Out->Print(get_out_console[5]);
+			Out->Print(get_out_console[42]);
 			temp_input.clear();
 			getline(std::cin, temp_input);
 		}
 		if(temp_input[0] == 'Y')
 		{
 			temp_input.clear();
-			Out->Print(get_out_console[6]);
+			Out->Print(get_out_console[44]);
 			getline(std::cin, temp_input);
-			data->Add_Example(Temp_Word, temp_input);
-			Current_User->Add_Example(Temp_Word, temp_input);
+			data->Add_Example(memory_strategy->First_Word(), temp_input);
+			Current_User->Add_Example(memory_strategy->First_Word(), temp_input);
 		}
-		Memory_Strategy->After_Factory();
+		memory_strategy->After_Factory();
 	}
-	Memory_Strategy->Run();
-	std::stringstream ss; ss << Recited_Times; std::string A; A.clear(); ss >> A;
-	Out->Print(get_out_console[2] + A + get_out_console[3]);
+	memory_strategy->Run();
+	std::stringstream ss; ss << memory_strategy->Recited_Times; std::string A; A.clear(); ss >> A;
+	Out->Print(get_out_console[40] + A + get_out_console[41]);
 }
 void Console::Run(){
 	while (1){
@@ -334,7 +340,7 @@ void Console::Run(){
 		getline(std::cin, Temp);
 		if (Temp.size() == 1 && Temp[0] >= '1' && Temp[0] <= '6'){
 			switch (Temp[0]){
-				case '1': memory_strategy->Run(); break;
+				case '1': Memory(); break;
 				case '2': Search(); break;
 				case '3': Test(); break;
 				case '4': NewWords(); break;

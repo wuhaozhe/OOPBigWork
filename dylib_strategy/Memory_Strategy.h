@@ -12,7 +12,6 @@ class Memory_Strategy{
 	std::queue<int> Amount_Recited_Times;    //该单词背诵次数 
 	int Word_Num;          //用户需要的单词个数
 	int Difficulty;           //用户设定难度 
-	std::vector<std::string> get_out_console;
 public:
 	int Recited_Times;
 	int Right_Times;
@@ -24,10 +23,11 @@ public:
 	
 	void Init(int Temp);
 	bool Exist();
-	virtual std::string Query() = 0;
+	virtual std::string Get_Query() = 0;
 	virtual bool Check(std::string Temp) = 0;
 	virtual std::string Work(std::string Ans) = 0;
 	Memory_Strategy(User *temp_user, Database *temp_data);
 	Memory_Strategy() = default;
+	std::string First_Word();
 };
 #endif

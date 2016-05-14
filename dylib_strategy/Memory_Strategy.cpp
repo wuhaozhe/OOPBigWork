@@ -4,19 +4,6 @@ Memory_Strategy::Memory_Strategy(User *temp_user, Database *temp_data): Current_
 	Word_Num = 0;
 	Recited_Times = 0;
 	Right_Times = 0;
-	std::ifstream Fin;
-	#ifdef _WIN32
-		Fin.open("Memory_Strategy_Windows.txt");
-	#else
-		Fin.open("Memory_Strategy_linux.txt");
-	#endif
-	std::string get_in;
-	while(getline(Fin, get_in))
-	{
-		get_out_console.push_back(get_in);
-		get_in.clear();
-	}
-	Fin.close();
 }
 void Memory_Strategy::Get_Words_Queue()
 {
@@ -104,9 +91,13 @@ std::string Memory_Strategy::Run()
 	}
 }
 void Memory_Strategy::Init(int Temp){
-	Word_Num = temp;
+	Word_Num = Temp;
 	Get_Words_Queue();
 }
 bool Memory_Strategy::Exist(){
 	return !Wanted_Words.empty();
+}
+std::string Memory_Strategy::First_Word()
+{
+	return Wanted_Words.front();
 }

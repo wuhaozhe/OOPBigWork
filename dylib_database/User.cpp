@@ -158,6 +158,7 @@ void User::Change_Memory_Strategy_Number(int Wanted_Strategy)
 {
 	Memory_Strategy_Number = Wanted_Strategy;
 	std::ifstream fin;
+	fin.open(User_Memorized_filename);
 	std::string temp_input;
 	std::vector<std::string> temp_record;
 	temp_record.clear();
