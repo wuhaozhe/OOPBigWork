@@ -45,3 +45,9 @@ std::string Test_Strategy::Work(bool Result){
 	level = std::min(level, 5.0); level = std::max(level, 1.0);
 	return A;
 }
+void Test_Strategy::Set_Answer(int Temp){
+	Answer = Temp;
+}
+int Test_Strategy::Get_Answer(){
+	return Answer;
+}

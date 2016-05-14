@@ -13,7 +13,7 @@ std::string Test_Strategy_TF::Get_Query(std::string Temp_Word){
 		Query += data->Get_Chinese(data->Get_English(Temp2)) + "\n";
 	}
 	Query += "choose T means true, F means false";
-	Answer = Temp1;
+	Set_Answer(Temp1);
 	return Query;
 }
 bool Test_Strategy_TF::Check(std::string Temp){
@@ -23,7 +23,7 @@ bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
 	int answer;
 	if (Temp_Word[0] == 'T') answer = 0;
 	if (Temp_Word[0] == 'F') answer = 1;
-	return (answer == Answer);
+	return (answer == Get_Answer());
 }
 Test_Strategy_TF::Test_Strategy_TF(Database *temp_data): Test_Strategy(temp_data){
 }

@@ -17,11 +17,11 @@ std::string Test_Strategy_Multi::Get_Query(std::string Temp_Word){
 		Query += "\n";
 	}
 	Query += "please choose A B C or D";
-	Answer = Temp1;
+	Set_Answer(Temp1);
 	return Query;
 }
 bool Test_Strategy_Multi::Test_Word(std::string Temp_Word){
-	return (Answer == Temp_Word[0]-'A'+1);
+	return (Get_Answer() == Temp_Word[0]-'A'+1);
 }
 bool Test_Strategy_Multi::Check(std::string Temp){
 	return Temp.size() == 1 && Temp[0] >= 'A' && Temp[0] <= 'D';
