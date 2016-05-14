@@ -1,7 +1,8 @@
 #include <cstring>
+#include <sstream>
 #include "Console.h"
 void Console::Change_Memory_Strategy(){
-	std::cout << get_out_console[0] << std::endl;
+	Out->Print(get_out_console[0]);
 	std::string Temp;
 	getline(std::cin, Temp);
 	if (Temp.size() == 1 && Temp[0] >= '1' && Temp[0] <= '2'){
@@ -15,33 +16,36 @@ void Console::Change_Memory_Strategy(){
 				break;
 		}
 	}
-	else std::cout << get_out_console[1] << std::endl;
+	else Out->Print(get_out_console[1]);
 }
 std::string Console::Get_Word(std::string Temp_Word){
 	return data->Get_Chinese(Temp_Word);
 }
 void Console::Show_Search_History(){
 	std::vector<std::string>History = Current_User->Get_Search_History();
-	if (History.size() == 0) std::cout << get_out_console[2] << std::endl;
+	if (History.size() == 0) Out->Print(get_out_console[2]);
 	else{
-		std::cout << get_out_console[3] << History.size() << get_out_console[4] << std::endl;
-		for (int i = (int)History.size() - 1; i >= 0; --i) std::cout << History[i] << std::endl;
+		std::stringstream ss; 
+		ss << History.size();
+		std::string Temp; Temp.clear();
+		ss >> Temp;
+		ss.clear(); ss.str("");
+		Out.Print(get_out_console[3]+Temp+get_out_console[4]);
+		for (int i = (int)History.size() - 1; i >= 0; --i) Out->Print(History[i]);
 	}
 }
 void Console::Search(){
 	while (1){
-		std::cout << get_out_console[5] << std::endl << get_out_console[6] << std::endl
-		<< get_out_console[7] << std::endl << get_out_console[8] << std::endl
-		<< get_out_console[9] << std::endl;
-		char Temp[200]; std::string Temp_Word, Chinese;
-		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1){
+		for (int i = 5; i <= 9; ++i) Out->Print(get_out_console[i]);
+		std::string Temp; std::string Temp_Word, Chinese;
+		getline(std::cin, Temp);
+		if (Temp.size() == 1){
 			switch (Temp[0]){
 				case '0':
-					std::cin.getline(Temp, 200); Temp_Word = Temp;
+					getline(std::cin, Temp); Temp_Word = Temp;
 					Chinese = data->Get_Chinese(Temp_Word);
-					if (Chinese == "") std::cout << get_out_console[10] << std::endl;
-					else std::cout << Chinese << std::endl;
+					if (Chinese == "") Out->Print(get_out_console[10]);
+					else Out->Print(Chinese);
 					Current_User->Add_History(Temp_Word);
 					break;
 				case '1':
@@ -58,10 +62,10 @@ void Console::Search(){
 }
 void Console::Test(){
 	while (1){
-		std::cout << get_out_console[11] << std::endl;
-		char Temp[200];
-		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '3'){
+		Out->Print(get_out_console[11]);
+		std::string Temp;
+		getline(std::cin, Temp);
+		if (Temp.size() == 1 && Temp[0] >= '1' && Temp[0] <= '3'){
 			switch (Temp[0]){
 				case '1':
 					test_strategy = new Test_Strategy_TF(data);
@@ -268,13 +272,10 @@ Console::Console(Database *temp_data, Output *temp_out):data(temp_data), Current
 }
 void Console::Run(){
 	while (1){
-		std::cout << get_out_console[12] << std::endl << get_out_console[13] << std::endl
-		<< get_out_console[14] << std::endl << get_out_console[15] << std::endl
-		<< get_out_console[16] << std::endl << get_out_console[17] << std::endl
-		<< get_out_console[18] << std::endl;
-		char Temp[200];
-		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1 && Temp[0] >= '1' && Temp[0] <= '6'){
+		for (int i = 12; i <= 18; ++i) Out->Print(get_out_console[i]);
+		std::string Temp;
+		getline(std::cin, Temp);
+		if (Temp.size() == 1 && Temp[0] >= '1' && Temp[0] <= '6'){
 			switch (Temp[0]){
 				case '1': memory_strategy->Run(); break;
 				case '2': Search(); break;
