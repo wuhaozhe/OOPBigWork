@@ -100,6 +100,7 @@ void Console::Test(){
 void Console::NewWords(){
 	if (newwords_strategy) delete newwords_strategy;
 	newwords_strategy = new NewWords_Strategy2(Current_User, data);
+	Out->Print(get_out_console[46]);
 	std::string Temp_filename;
 	getline(std::cin, Temp_filename);
 	Out->Print(newwords_strategy->Run(Temp_filename));
