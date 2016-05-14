@@ -13,6 +13,7 @@
 #include <Test_Strategy_Multi.h>
 class Console{
 private:
+	Output *Out;
 	Database *data;
 	User *Current_User;
 	Memory_Strategy *memory_strategy;       //记忆策略 1表示扇贝模式，2表示百词斩模式 
@@ -30,7 +31,8 @@ private:
 	
 public:
 	void Run();
-	Console(Database *temp_data, User *temp_user); 
+	void Setup();
+	Console(Database *temp_data, Output *temp_out); 
 	Console() = default;
 };
 #endif

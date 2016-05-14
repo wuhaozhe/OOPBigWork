@@ -31,7 +31,7 @@ public:
 	void Change_Memory_Strategy_Number(int Wanted_Strategy);      //更改记忆策略 
 	void Change_Difficulty_Of_User(int Temp_Difficulty);
 	void Change_Memory_times(std::string Temp_Word, int Right_Times, int Recited_times);
-	User(Database *temporary);
+	User(Database *temporary, std::string temp_name);
 	User() = default;
 };
 #endif

@@ -11,8 +11,10 @@ int main()
 	#endif
 	Database temporary(fin);
 	fin.close();
-	User newuser(&temporary);
-	Console newconsole(&temporary, &newuser);
+	//User newuser(&temporary);
+	//Console newconsole(&temporary, &newuser);
+	Console newconsole(&temporary, new Output_Screen());
+	newconsole.Setup();
 	newconsole.Run();
 	return 0;
 }

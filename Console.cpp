@@ -80,7 +80,182 @@ void Console::NewWords(){
 	newwords_strategy = new NewWords_Strategy1(Current_User, data);
 	newwords_strategy->Run();
 }
-Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_User(temp_user), newwords_strategy(NULL), test_strategy(NULL){
+void Console::Setup(){
+	std::ifstream Fin;
+	#ifdef _WIN32
+		Fin.open("User_Windows.txt");
+	#else
+		Fin.open("User_linux.txt");
+	#endif
+	std::string get_in;
+	while(getline(Fin, get_in))
+	{
+		get_out_console.push_back(get_in);
+		get_in.clear();
+	}
+	Fin.close();
+	std::string temp_name;
+	std::string temp_password;
+	std::string flag;
+	Out->Print(get_out_console[19]);
+	Out->Print(get_out_console[20]);
+	getline(cin, flag);
+	while(!(flag.size() == 1 && (flag[0] == '1' || flag[0] == '2')))
+	{
+		Out->Print(get_out_console[21]);
+		flag.clear(); 
+		getline(cin, flag);
+	}
+	if(flag[0] == '1')   //register
+	{
+		std::string temp;
+		std::string name;
+		std::string password;
+		std::ofstream fout;        //此处没有管mac, 需要改动 
+		//#ifdef _WIN32
+		//	fout.open("User\\account.txt", std::ios::app);
+		//#else
+			fout.open("User/account.txt", std::ios::app);
+		//#endif
+		Out->Print(get_out_console[22]);
+		temp.clear();
+		getline(cin, temp);
+		name = temp;
+		temp_name = name;
+		fout<<temp<<std::endl;
+		Out->Print(get_out_console[23]);
+		password.clear();
+		getline(cin, password);
+		fout<<password<<std::endl;
+		fout.close();
+		std::string filename;
+		//#ifdef _WIN32
+		//	filename = "User\\";
+		//#else
+			filename = "User/";
+		//#endif
+		filename += name;
+		filename += "MemorizedWords.txt";
+		fout.open(filename);
+		temp.clear();
+		Out->Print(get_out_console[24]);
+		temp.clear();
+		getline(cin, temp);
+		while(temp != password)
+		{
+			Out->Print(get_out_console[25]);
+			temp.clear();
+			getline(cin, temp);
+		}
+		
+		Out->Print(get_out_console[26]);
+		Out->Print(get_out_console[27]);
+		Out->Print(get_out_console[28]);
+		flag.clear();
+		getline(cin, flag);
+		while(!(flag.size() == 1 && flag[0] >= '1' && flag[0] <= '5'))
+		{
+			Out->Print(get_out_console[29]);
+			flag.clear();
+			getline(cin, flag);
+		}
+		char b1 = flag[0];
+		
+		Out->Print(get_out_console[30]);
+		Out->Print(get_out_console[31]);
+		Out->Print(get_out_console[32]);
+		flag.clear();
+		getline(cin, flag);
+		while(!(flag.size() == 1 && flag[0] >= '1' && flag[0] <= '2'))
+		{
+			Out->Print(get_out_console[33]);
+			flag.clear(); 
+			getline(cin, flag);
+		}
+		fout<<flag[0]<<" "<<b1;
+		for(int i = 1; i <= 16; i++)
+			fout<<std::endl;
+		fout.close();
+		//#ifdef _WIN32
+		//	filename = "User\\";
+		//#else
+			filename = "User/";
+		//#endif
+		filename += name;
+		filename += "Examples.txt";
+		fout.open(filename);
+		fout.close();
+	}
+	else if(flag[0] == '2')   //login
+	{
+		std::string file_temp_name;
+		std::string file_temp_password;
+		std::ifstream fin;
+		int p = 0, found = 0;
+		do
+		{
+			p = 0;
+			found = 0;
+			Out->Print(get_out_console[34]);
+			temp_name.clear();
+			getline(cin, temp_name);
+			Out->Print(get_out_console[35]);
+			temp_password.clear();
+			getline(cin, temp_password);
+			//#ifdef _WIN32
+			//	fin.open("User\\account.txt", std::ios::app);
+			//#else
+				fin.open("User/account.txt");
+			//#endif
+			char temporary2[100] = {0};
+			while(fin.getline(temporary2, 100))
+			{
+				file_temp_name = temporary2;
+				if(p % 2 == 1)       //password line
+				{
+					p++;
+					memset(temporary2, 0, sizeof(temporary2));
+					file_temp_name.clear();
+					continue;
+				}
+				else         //user nameline
+				{
+					p++;
+					if(file_temp_name == temp_name)
+					{
+						char temporary3[100] = {0};
+						fin.getline(temporary3, 100);
+						file_temp_password = temporary3;
+						found = 1;
+						break;
+					}
+				}
+			}
+			if(found != 0 && (file_temp_password == temp_password))
+			{
+				Out->Print(get_out_console[36]);
+				break;
+			}
+			else
+			{
+				Out->Print(get_out_console[37]);
+				fin.close();
+			}
+		}while(found == 0 || file_temp_password != temp_password);
+	}
+	Current_User = new User(data, temp_name);
+	//分割线 
+	switch (Current_User->Get_Memory_Strategy()){
+		case 1:
+			memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
+			break;
+		case 2:
+			memory_strategy = new Memory_Strategy_Towords(Current_User, data);
+			break;
+	}
+}
+Console::Console(Database *temp_data, Output *temp_out):data(temp_data), Current_User(NULL), newwords_strategy(NULL), test_strategy(NULL), Out(temp_out)
+{
 	std::ifstream fin;
 	#ifdef _WIN32
 		fin.open("Console_Windows.txt");
@@ -94,14 +269,6 @@ Console::Console(Database *temp_data, User *temp_user):data(temp_data), Current_
 		get_in.clear();
 	}
 	fin.close();
-	switch (Current_User->Get_Memory_Strategy()){
-		case 1:
-			memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
-			break;
-		case 2:
-			memory_strategy = new Memory_Strategy_Towords(Current_User, data);
-			break;
-	}
 }
 void Console::Run(){
 	while (1){
