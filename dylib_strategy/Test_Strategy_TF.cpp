@@ -3,7 +3,7 @@ std::string Test_Strategy_TF::Get_Query(std::string Temp_Word){
 	std::string Query; Query.clear();
 	int Temp1, Temp2, answer;
 	Temp1 = rand()%2;
-	Query += std::cout << Temp_Word << std::endl;
+	Query += Temp_Word + "\n";
 	if (Temp1 == 0) Query += data->Get_Chinese(Temp_Word) + "\n";
 	else{
 		while (1){

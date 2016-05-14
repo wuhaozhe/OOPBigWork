@@ -84,7 +84,7 @@ void Console::Test(){
 			}
 			test_strategy->Init();
 			int temp; std::string Temp_Word; int correct = 0;
-			while (!test_strategy.End()){
+			while (!test_strategy->End()){
 				Out->Print(test_strategy->Get_Query(test_strategy->Get_Word()));
 				Temp.clear(); getline(std::cin, Temp);
 				while (!test_strategy->Check(Temp)){
@@ -92,7 +92,7 @@ void Console::Test(){
 				}
 				Out->Print(test_strategy->Work(test_strategy->Test_Word(Temp)));
 			}
-			std::stringstream ss; ss << level; Temp.clear(); ss >> Temp;
+			std::stringstream ss; ss << test_strategy->Get_Level(); Temp.clear(); ss >> Temp;
 			Out->Print(get_out_console[45] + Temp);
 		}
 	}

@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <algorithm>
-Test_Strategy::Test_Strategy(Database *temp_data): data(temp_data), times(10){
+Test_Strategy::Test_Strategy(Database *temp_data): data(temp_data), times(20){
 	std::ifstream fin;
 	#ifdef _WIN32
 		fin.open("Test_Strategy_Windows.txt");
@@ -43,6 +43,7 @@ std::string Test_Strategy::Work(bool Result){
 		level -= 4.0/times;
 	}
 	level = std::min(level, 5.0); level = std::max(level, 1.0);
+	Count++;
 	return A;
 }
 void Test_Strategy::Set_Answer(int Temp){
@@ -50,4 +51,7 @@ void Test_Strategy::Set_Answer(int Temp){
 }
 int Test_Strategy::Get_Answer(){
 	return Answer;
+}
+int Test_Strategy::Get_Level(){
+	return level;
 }
