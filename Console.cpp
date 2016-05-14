@@ -82,7 +82,18 @@ void Console::Test(){
 				case '3':
 					return;
 			}
-			test_strategy->Run();
+			test_strategy->Init();
+			int temp; std::string Temp_Word; int correct = 0;
+			while (!test_strategy.End()){
+				Out->Print(test_strategy->Get_Query(test_strategy->Get_Word()));
+				Temp.clear(); getline(std::cin, Temp);
+				while (!test_strategy->Check(Temp)){
+					Temp.clear(); getline(std::cin, Temp);
+				}
+				Out->Print(test_strategy->Work(test_strategy->Test_Word(Temp)));
+			}
+			std::stringstream ss; ss << level; Temp.clear(); ss >> Temp;
+			Out->Print(get_out_console[2] + Temp);
 		}
 	}
 }

@@ -1,26 +1,29 @@
 #include "Test_Strategy_TF.h"
-bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
+std::string Test_Strategy_TF::Get_Query(std::string Temp_Word){
+	std::string Query; Query.clear();
 	int Temp1, Temp2, answer;
 	Temp1 = rand()%2;
-	std::cout << Temp_Word << std::endl;
-	if (Temp1 == 0) std::cout << data->Get_Chinese(Temp_Word) << std::endl;
+	Query += std::cout << Temp_Word << std::endl;
+	if (Temp1 == 0) Query += data->Get_Chinese(Temp_Word) + "\n";
 	else{
 		while (1){
 			Temp2 = rand()%data->Get_Words_Size();
 			if (data->Get_English(Temp2) != Temp_Word) break;
 		}
-		std::cout << data->Get_Chinese(data->Get_English(Temp2)) << std::endl;
+		Query += data->Get_Chinese(data->Get_English(Temp2)) + "\n";
 	}
-	std::cout << "choose t means true, f means false" << std::endl;
-	char Temp[200];
-	while (1){
-		std::cin.getline(Temp, 200);
-		if (strlen(Temp) == 1){
-			if (Temp[0] == 't') { answer = 0; break; }
-			if (Temp[0] == 'f') { answer = 1; break; }
-		}
-	}
-	return (answer == Temp1);
+	Query += "choose T means true, F means false";
+	Answer = Temp1;
+	return Query;
+}
+bool Test_Strategy_TF::Check(std::string Temp){
+	return Temp.size() == 1 && (Temp[0] == 'T' || Temp[0] == 'F');
+}
+bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
+	int answer;
+	if (Temp_Word[0] == 'T') answer = 0;
+	if (Temp_Word[0] == 'F') answer = 1;
+	return (answer == Answer);
 }
 Test_Strategy_TF::Test_Strategy_TF(Database *temp_data): Test_Strategy(temp_data){
 }
