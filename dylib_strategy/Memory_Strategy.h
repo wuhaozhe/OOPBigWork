@@ -14,8 +14,8 @@ class Memory_Strategy{
 	int Difficulty;           //用户设定难度 
 	std::vector<std::string> get_out_console;
 public:
-	float Recited_Times;
-	float Right_Times;
+	int Recited_Times;
+	int Right_Times;
 	User *Current_User;
 	Database *data;
 	void Get_Words_Queue();         //获得要背单词的队列 

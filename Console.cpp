@@ -99,12 +99,12 @@ void Console::Setup(){
 	std::string flag;
 	Out->Print(get_out_console[19]);
 	Out->Print(get_out_console[20]);
-	getline(cin, flag);
+	getline(std::cin, flag);
 	while(!(flag.size() == 1 && (flag[0] == '1' || flag[0] == '2')))
 	{
 		Out->Print(get_out_console[21]);
 		flag.clear(); 
-		getline(cin, flag);
+		getline(std::cin, flag);
 	}
 	if(flag[0] == '1')   //register
 	{
@@ -119,13 +119,13 @@ void Console::Setup(){
 		//#endif
 		Out->Print(get_out_console[22]);
 		temp.clear();
-		getline(cin, temp);
+		getline(std::cin, temp);
 		name = temp;
 		temp_name = name;
 		fout<<temp<<std::endl;
 		Out->Print(get_out_console[23]);
 		password.clear();
-		getline(cin, password);
+		getline(std::cin, password);
 		fout<<password<<std::endl;
 		fout.close();
 		std::string filename;
@@ -140,24 +140,24 @@ void Console::Setup(){
 		temp.clear();
 		Out->Print(get_out_console[24]);
 		temp.clear();
-		getline(cin, temp);
+		getline(std::cin, temp);
 		while(temp != password)
 		{
 			Out->Print(get_out_console[25]);
 			temp.clear();
-			getline(cin, temp);
+			getline(std::cin, temp);
 		}
 		
 		Out->Print(get_out_console[26]);
 		Out->Print(get_out_console[27]);
 		Out->Print(get_out_console[28]);
 		flag.clear();
-		getline(cin, flag);
+		getline(std::cin, flag);
 		while(!(flag.size() == 1 && flag[0] >= '1' && flag[0] <= '5'))
 		{
 			Out->Print(get_out_console[29]);
 			flag.clear();
-			getline(cin, flag);
+			getline(std::cin, flag);
 		}
 		char b1 = flag[0];
 		
@@ -165,12 +165,12 @@ void Console::Setup(){
 		Out->Print(get_out_console[31]);
 		Out->Print(get_out_console[32]);
 		flag.clear();
-		getline(cin, flag);
+		getline(std::cin, flag);
 		while(!(flag.size() == 1 && flag[0] >= '1' && flag[0] <= '2'))
 		{
 			Out->Print(get_out_console[33]);
 			flag.clear(); 
-			getline(cin, flag);
+			getline(std::cin, flag);
 		}
 		fout<<flag[0]<<" "<<b1;
 		for(int i = 1; i <= 16; i++)
@@ -198,23 +198,21 @@ void Console::Setup(){
 			found = 0;
 			Out->Print(get_out_console[34]);
 			temp_name.clear();
-			getline(cin, temp_name);
+			getline(std::cin, temp_name);
 			Out->Print(get_out_console[35]);
 			temp_password.clear();
-			getline(cin, temp_password);
+			getline(std::cin, temp_password);
 			//#ifdef _WIN32
 			//	fin.open("User\\account.txt", std::ios::app);
 			//#else
 				fin.open("User/account.txt");
 			//#endif
-			char temporary2[100] = {0};
-			while(fin.getline(temporary2, 100))
+			while(getline(fin, file_temp_name))
 			{
-				file_temp_name = temporary2;
+				file_temp_name;
 				if(p % 2 == 1)       //password line
 				{
 					p++;
-					memset(temporary2, 0, sizeof(temporary2));
 					file_temp_name.clear();
 					continue;
 				}
@@ -222,10 +220,8 @@ void Console::Setup(){
 				{
 					p++;
 					if(file_temp_name == temp_name)
-					{
-						char temporary3[100] = {0};
-						fin.getline(temporary3, 100);
-						file_temp_password = temporary3;
+					{;
+						getline(fin, file_temp_password);
 						found = 1;
 						break;
 					}

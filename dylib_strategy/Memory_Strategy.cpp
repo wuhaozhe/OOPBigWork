@@ -17,21 +17,20 @@ Memory_Strategy::Memory_Strategy(User *temp_user, Database *temp_data): Current_
 		get_in.clear();
 	}
 	Fin.close();
-	std::cout<<get_out_console[0]<<" "<<get_out_console[1]<<" "<<get_out_console[2]<<" "<<get_out_console[3]<<std::endl;
 }
 void Memory_Strategy::Get_Words_Queue()
 {
 	auto Record_Map = Current_User->Whole_Memorized_Words();
 	auto iter = Record_Map.begin();
-	float Reviewed_Words_Num = 0;
-	float Temp_Word_Num = Word_Num;
+	int Reviewed_Words_Num = 0;
+	int Temp_Word_Num = Word_Num;
 	std::vector<int> prevent_repeat;
 	prevent_repeat.clear();
 	for(; iter != Record_Map.end(); iter++)
 	{
-		float element = iter->second.first;   //分子 
-		float denominator = iter->second.second;    //分母
-		if(!(element / denominator >= 0.6 && denominator >= 5))     //加入队列条件
+		int element = iter->second.first;   //分子 
+		int denominator = iter->second.second;    //分母
+		if(!(1.0 * element / denominator >= 0.6 && denominator >= 5))     //加入队列条件
 		{
 			Wanted_Words.push(iter->first);
 			Whether_Used.push(1);
@@ -85,6 +84,8 @@ void Memory_Strategy::After_Factory()
 }
 void Memory_Strategy::Run()
 {
+	Recited_Times = 0;
+	Right_Times = 0;
 	std::cout<<get_out_console[0]<<std::endl;
 	std::string temp_input;
 	temp_input.clear();
@@ -102,6 +103,7 @@ void Memory_Strategy::Run()
 				break;
 			}
 	}while(flag != 0);
+	Word_Num = 0;
 	for(int i = 0; i < temp_input.size(); i++)
 		Word_Num += (temp_input[i] - '0') * pow(10, temp_input.size() - i - 1);
 	Get_Words_Queue();
@@ -117,6 +119,7 @@ void Memory_Strategy::Run()
 		{
 			int Temp_Difficulty = Current_User->Get_Difficulty() + 1;
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
+			Difficulty = Temp_Difficulty;
 		}	
 	}
 	if(Right_Times <= (Recited_Times * 0.5))
@@ -125,6 +128,7 @@ void Memory_Strategy::Run()
 		{
 			int Temp_Difficulty = Current_User->Get_Difficulty() - 1;
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
+			Difficulty = Temp_Difficulty;
 		}	
 	}
 	std::cout<<get_out_console[2]<<Recited_Times<<get_out_console[3]<<std::endl;
