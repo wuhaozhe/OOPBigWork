@@ -51,9 +51,7 @@ User::User(Database *temporary, std::string temp_name): wordslist(temporary)
 	std::string temp_history;
 	for(int i = 1; i <= 15; i++)
 	{
-		char temporary4[100] = {0};
-		fin.getline(temporary4, 100);
-		temp_history = temporary4;
+		getline(fin, temp_history);
 		if(temp_history.size() >= 1)
 			Search_History.push_back(temp_history);
 		temp_history.clear();	
@@ -67,8 +65,8 @@ User::User(Database *temporary, std::string temp_name): wordslist(temporary)
 	std::string temp_str;
 	temp_word.clear();
 	std::string temp_examples;
-	char temporary5[400] = {0};
-	while(fin.getline(temporary5, 400))
+	std::string temporary5;
+	while(getline(fin, temporary5))
 	{
 		temp_str = temporary5;
 		int p = 0;
@@ -84,7 +82,7 @@ User::User(Database *temporary, std::string temp_name): wordslist(temporary)
 		temp_word.clear();
 		temp_examples.clear();
 		temp_str.clear();
-		memset(temporary5, 0, sizeof(temporary5));
+		temporary5.clear();
 	}
 }
 void User::Add_Example(std::string Word, std::string Example)
@@ -98,15 +96,13 @@ void User::Add_History(std::string Word)
 {
 	std::ifstream fin;
 	fin.open(User_Memorized_filename);
-	char temp_input[200] = {0};
+	std::string temp_input;
 	std::vector<std::string> temp_record;
 	temp_record.clear();
-	while(fin.getline(temp_input, 200))
+	while(getline(fin, temp_input))
 	{
-		std::string a = temp_input;
-		temp_record.push_back(a);
-		a.clear();
-		memset(temp_input, 0, sizeof(temp_input));
+		temp_record.push_back(temp_input);
+		temp_input.clear();
 	}
 	fin.close();
 	std::ofstream fout;
@@ -136,15 +132,13 @@ void User::Clear_History()
 {
 	std::ifstream fin;
 	fin.open(User_Memorized_filename);
-	char temp_input[200] = {0};
+	std::string temp_input;
 	std::vector<std::string> temp_record;
 	temp_record.clear();
-	while(fin.getline(temp_input, 200))
+	while(getline(fin, temp_input))
 	{
-		std::string a = temp_input;
-		temp_record.push_back(a);
-		a.clear();
-		memset(temp_input, 0, sizeof(temp_input));
+		temp_record.push_back(temp_input);
+		temp_input.clear();
 	}
 	fin.close();
 	std::ofstream fout;
@@ -164,16 +158,13 @@ void User::Change_Memory_Strategy_Number(int Wanted_Strategy)
 {
 	Memory_Strategy_Number = Wanted_Strategy;
 	std::ifstream fin;
-	fin.open(User_Memorized_filename);
-	char temp_input[200] = {0};
+	std::string temp_input;
 	std::vector<std::string> temp_record;
 	temp_record.clear();
-	while(fin.getline(temp_input, 200))
+	while(getline(fin, temp_input))
 	{
-		std::string a = temp_input;
-		temp_record.push_back(a);
-		a.clear();
-		memset(temp_input, 0, sizeof(temp_input));
+		temp_record.push_back(temp_input);
+		temp_input.clear();
 	}
 	fin.close();
 	std::ofstream fout;
@@ -188,15 +179,13 @@ void User::Change_Difficulty_Of_User(int Temp_difficulty)
 	Difficulty_Of_User = Temp_difficulty;
 	std::ifstream fin;
 	fin.open(User_Memorized_filename);
-	char temp_input[200] = {0};
+	std::string temp_input;
 	std::vector<std::string> temp_record;
 	temp_record.clear();
-	while(fin.getline(temp_input, 200))
+	while(getline(fin, temp_input))
 	{
-		std::string a = temp_input;
-		temp_record.push_back(a);
-		a.clear();
-		memset(temp_input, 0, sizeof(temp_input));
+		temp_record.push_back(temp_input);
+		temp_input.clear();
 	}
 	fin.close();
 	std::ofstream fout;
@@ -227,14 +216,12 @@ void User::Change_Memory_times(std::string Temp_Word, int Right_Times, int Recit
 		std::vector<std::string> Temp_Record;
 		std::ifstream fin;
 		fin.open(User_Memorized_filename);
-		char temp_input[200] = {0};
+		std::string temp_input;
 		Temp_Record.clear();
-		while(fin.getline(temp_input, 200))
+		while(getline(fin, temp_input))
 		{
-			std::string a = temp_input;
-			Temp_Record.push_back(a);
-			a.clear();
-			memset(temp_input, 0, sizeof(temp_input));
+			Temp_Record.push_back(temp_input);
+			temp_input.clear();
 		}
 		fin.close();
 		std::ofstream fout;
