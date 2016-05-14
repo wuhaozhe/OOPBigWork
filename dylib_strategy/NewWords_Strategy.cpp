@@ -15,9 +15,9 @@ std::string NewWords_Strategy::Run(std::string filename){
 			if (!(data->Exist(Temp_Word)) || (data->Get_Difficulty(Temp_Word) > Current_User->Get_Difficulty() && 
 			Current_User->Get_Memorized_Times(Temp_Word).first == 0)){
 				if (List.count(Temp_Word) == 0){
-					Leave += get_out_console[0] + Temp_Word + "\n";
-					if (data->Exist(Temp_Word)) Leave += data->Get_Chinese(Temp_Word);
-					else Leave += get_out_console[1];
+					Left += get_out_console[0] + Temp_Word + "\n";
+					if (data->Exist(Temp_Word)) Left += data->Get_Chinese(Temp_Word);
+					else Left += get_out_console[1];
 					List.insert(Temp_Word);
 				}
 			}
@@ -25,7 +25,7 @@ std::string NewWords_Strategy::Run(std::string filename){
 		Temp_Word = "";
 	}
 	List.clear();
-	return Leave;
+	return Left;
 }
 NewWords_Strategy::NewWords_Strategy(User *temp_user, Database *temp_data): Current_User(temp_user), data(temp_data){
 	std::ifstream fin;

@@ -9,6 +9,7 @@
 #include <Memory_Strategy_Towords.h>
 #include <NewWords_Strategy.h>
 #include <NewWords_Strategy1.h>
+#include <NewWords_Strategy2.h>
 #include <Test_Strategy.h>
 #include <Test_Strategy_TF.h>
 #include <Test_Strategy_Multi.h>
