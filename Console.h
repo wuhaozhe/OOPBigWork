@@ -11,6 +11,8 @@
 #include <Test_Strategy.h>
 #include <Test_Strategy_TF.h>
 #include <Test_Strategy_Multi.h>
+#include "Output.h"
+#include "Output_Screen.h"
 class Console{
 private:
 	Output *Out;
