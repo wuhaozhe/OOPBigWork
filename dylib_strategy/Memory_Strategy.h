@@ -19,9 +19,14 @@ public:
 	User *Current_User;
 	Database *data;
 	void Get_Words_Queue();         //获得要背单词的队列 
-	virtual void Word_Factory(std::string Temp_Word) = 0;        //对单词进行处理 
 	void After_Factory();           //对该单词进行各种信息改动 
-	void Run();
+	std::string Run();
+	
+	void Init(int Temp);
+	bool Exist();
+	virtual std::string Query() = 0;
+	virtual bool Check(std::string Temp) = 0;
+	virtual std::string Work(std::string Ans) = 0;
 	Memory_Strategy(User *temp_user, Database *temp_data);
 	Memory_Strategy() = default;
 };

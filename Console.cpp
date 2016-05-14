@@ -30,7 +30,7 @@ void Console::Show_Search_History(){
 		std::string Temp; Temp.clear();
 		ss >> Temp;
 		ss.clear(); ss.str("");
-		Out.Print(get_out_console[3]+Temp+get_out_console[4]);
+		Out->Print(get_out_console[3]+Temp+get_out_console[4]);
 		for (int i = (int)History.size() - 1; i >= 0; --i) Out->Print(History[i]);
 	}
 }
@@ -269,6 +269,63 @@ Console::Console(Database *temp_data, Output *temp_out):data(temp_data), Current
 		get_in.clear();
 	}
 	fin.close();
+}
+void Console::Memory(){
+	Memory_Strategy->Recited_Times = 0;
+	Memory_Strategy->Right_Times = 0;
+	Out->Print(get_out_console[0]);
+	std::string temp_input;
+	temp_input.clear();
+	int flag = 0;
+	do
+	{
+		flag = 0;
+		getline(std::cin, temp_input);
+		for(int i = 0; i < temp_input.size(); i++)
+			if(temp_input[i] < '0' || temp_input[i] > '9')
+			{
+				Out->Print(get_out_console[1]);
+				flag = 1;
+				temp_input.clear();
+				break;
+			}
+	}while(flag != 0);
+	Word_Num = 0;
+	for(int i = 0; i < temp_input.size(); i++)
+		Word_Num += (temp_input[i] - '0') * pow(10, temp_input.size() - i - 1);
+	Memory_Strategy->Init(Word_Num);	
+	while(Memory_Strategy->Exist())
+	{
+		Out->Print(Memory_Strategy->GetQuery());
+		temp_input.clear();
+		getline(std::cin, temp_input);
+		while (!Memory_Strategy->Check(temp_input)){
+			Out->Print(get_out_console[2]);
+			temp_input.clear(); getline(std::cin, temp_input);
+		}
+		Out->Print(Memory_Strategy->Run(temp_input));
+		Out->Print(get_out_console[4]);
+		temp_input.clear();
+		getline(std::cin, temp_input);
+		while(!(temp_input.size() == 1 && (temp_input[0] == 'Y' || temp_input[0] == 'N')))
+		{
+			Out->Print(get_out_console[5]);
+			temp_input.clear();
+			getline(std::cin, temp_input);
+		}
+		if(temp_input[0] == 'Y')
+		{
+			temp_input.clear();
+			Out->Print(get_out_console[6]);
+			getline(std::cin, temp_input);
+			data->Add_Example(Temp_Word, temp_input);
+			Current_User->Add_Example(Temp_Word, temp_input);
+		}
+		Memory_Strategy->After_Factory();
+	}
+	Memory_Strategy->Run();
+	std::stringstream ss; ss << Recited_Times; std::string A; A.clear(); ss >> A;
+	Out->Print(get_out_console[2] + A + get_out_console[3]);
 }
 void Console::Run(){
 	while (1){

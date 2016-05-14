@@ -17,46 +17,27 @@ Memory_Strategy_Shanbay::Memory_Strategy_Shanbay(User *temp_user, Database *temp
 	}
 	fin.close();
 }
-void Memory_Strategy_Shanbay::Word_Factory(std::string Temp_Word)
-{
-	std::cout<<Temp_Word<<std::endl;
-	std::cout<<get_out_console[0]<<std::endl;
-	std::cout<<get_out_console[1]<<std::endl;
-	std::string temp_input;
-	getline(std::cin, temp_input);
-	while(!(temp_input.size() == 1 && (temp_input[0] == 'Y' || temp_input[0] == 'N')))
-	{
-		std::cout<<get_out_console[2]<<std::endl;
-		temp_input.clear();
-		getline(std::cin, temp_input);
-	}
-	if(temp_input[0] == 'N')
+std::string Memory_Strategy_Shanbay::Get_Query(){
+	Recited_Times++; std::string Query; Query.clear();
+	Temp_Word = Wanted_Words.front();
+	Query += Temp_Word + "\n" + get_out_console[0] + "\n" + get_out_console[1];
+	return Query;
+}
+bool Memory_Strategy_Shanbay::Check(std::string Temp){
+	return Temp.size() == 1 && (Temp[0] == 'Y' || Temp[0] == 'N');
+}
+void Memory_Strategy_Shanbay::Work(std::string Ans){
+	std::string Temp_ans; Temp_ans.clear();
+	if(Ans[0] == 'N')
 	{
 		int temp_right_times = (Current_User->Get_Memorized_Times(Temp_Word).first);
 		int temp_whole_times = (Current_User->Get_Memorized_Times(Temp_Word).second);
 		temp_whole_times++;
 		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
-		std::cout<<data->Get_Chinese(Temp_Word)<<std::endl;
-		std::cout<<get_out_console[3]<<std::endl;
+		Temp_ans +=  data->Get_Chinese(Temp_Word) + "\n" + get_out_console[3];
 		for(int i = 0; i < (int)data->Get_Examples(Temp_Word).size(); i++)
-			std::cout<<data->Get_Examples(Temp_Word)[i]<<std::endl;
-		std::cout<<get_out_console[4]<<std::endl;
-		temp_input.clear();
-		getline(std::cin, temp_input);
-		while(!(temp_input.size() == 1 && (temp_input[0] == 'Y' || temp_input[0] == 'N')))
-		{
-			std::cout<<get_out_console[5]<<std::endl;
-			temp_input.clear();
-			getline(std::cin, temp_input);
-		}
-		if(temp_input[0] == 'Y')
-		{
-			temp_input.clear();
-			std::cout<<get_out_console[6]<<std::endl;
-			getline(std::cin, temp_input);
-			data->Add_Example(Temp_Word, temp_input);
-			Current_User->Add_Example(Temp_Word, temp_input);
-		}
+			Temp_ans += "\n" + data->Get_Examples(Temp_Word)[i];
+		return Temp_ans;
 	}
 	else
 	{
@@ -66,5 +47,6 @@ void Memory_Strategy_Shanbay::Word_Factory(std::string Temp_Word)
 		temp_right_times++;
 		temp_whole_times++;
 		Current_User->Change_Memory_times(Temp_Word, temp_right_times, temp_whole_times);
+		return "";
 	}
 }

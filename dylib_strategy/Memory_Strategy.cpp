@@ -82,37 +82,8 @@ void Memory_Strategy::After_Factory()
 		Amount_Recited_Times.push(temp_first_amount);
 	}
 }
-void Memory_Strategy::Run()
+std::string Memory_Strategy::Run()
 {
-	Recited_Times = 0;
-	Right_Times = 0;
-	std::cout<<get_out_console[0]<<std::endl;
-	std::string temp_input;
-	temp_input.clear();
-	int flag = 0;
-	do
-	{
-		flag = 0;
-		getline(std::cin, temp_input);
-		for(int i = 0; i < temp_input.size(); i++)
-			if(temp_input[i] < '0' || temp_input[i] > '9')
-			{
-				std::cout<<get_out_console[1]<<std::endl;
-				flag = 1;
-				temp_input.clear();
-				break;
-			}
-	}while(flag != 0);
-	Word_Num = 0;
-	for(int i = 0; i < temp_input.size(); i++)
-		Word_Num += (temp_input[i] - '0') * pow(10, temp_input.size() - i - 1);
-	Get_Words_Queue();
-	while(!Wanted_Words.empty())
-	{
-		Recited_Times++;
-		Word_Factory(Wanted_Words.front());
-		After_Factory();
-	}
 	if(Right_Times >= (Recited_Times * 0.9))
 	{
 		if(Current_User->Get_Difficulty() < 5)
@@ -120,7 +91,7 @@ void Memory_Strategy::Run()
 			int Temp_Difficulty = Current_User->Get_Difficulty() + 1;
 			Current_User->Change_Difficulty_Of_User(Temp_Difficulty);
 			Difficulty = Temp_Difficulty;
-		}	
+		}
 	}
 	if(Right_Times <= (Recited_Times * 0.5))
 	{
@@ -131,5 +102,11 @@ void Memory_Strategy::Run()
 			Difficulty = Temp_Difficulty;
 		}	
 	}
-	std::cout<<get_out_console[2]<<Recited_Times<<get_out_console[3]<<std::endl;
-}	
+}
+void Memory_Strategy::Init(int Temp){
+	Word_Num = temp;
+	Get_Words_Queue();
+}
+bool Memory_Strategy::Exist(){
+	return !Wanted_Words.empty();
+}

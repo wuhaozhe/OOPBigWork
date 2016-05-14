@@ -2,6 +2,7 @@
 #define CONSOLE_H
 #include <Database.h>
 #include <fstream>
+#include <ctime>
 #include <User.h>
 #include <Memory_Strategy.h>
 #include <Memory_Strategy_Shanbay.h>
@@ -30,6 +31,7 @@ private:
 	void Search();   //在search中，根据用户要求决定是显示查询历史还是查单词 
 	void Test();	//选择测试模式并测试 1.判断题 2.选择题  
 	void NewWords();
+	void Memory(); 
 	
 public:
 	void Run();
