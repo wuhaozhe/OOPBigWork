@@ -1,5 +1,5 @@
 #include "NewWords_Strategy1.h"
-std::string NewWords_Strategy1::GetText(){
+std::string NewWords_Strategy1::GetText(std::string Filename){
 	std::string Text;
 	getline(std::cin, Text);
 	return Text;

@@ -1,7 +1,8 @@
 #include "NewWords_Strategy.h"
 #include <set>
-void NewWords_Strategy::Run(){
-	std::string Text = GetText(); Text += "."; int Len = Text.size();
+std::string NewWords_Strategy::Run(std::string filename){
+	std::string Left; Left.clear();
+	std::string Text = GetText(filename); Text += "."; int Len = Text.size();
 	std::set<std::string> List; List.clear();
 	std::string Temp_Word = "";
 	for (int i = 0; i < Len; ++i)
@@ -11,11 +12,12 @@ void NewWords_Strategy::Run(){
 	}
 	else{
 		if (Temp_Word != ""){
-			if (!(data->Exist(Temp_Word)) || (data->Get_Difficulty(Temp_Word) > Current_User->Get_Difficulty() && Current_User->Get_Memorized_Times(Temp_Word).first == 0)){
+			if (!(data->Exist(Temp_Word)) || (data->Get_Difficulty(Temp_Word) > Current_User->Get_Difficulty() && 
+			Current_User->Get_Memorized_Times(Temp_Word).first == 0)){
 				if (List.count(Temp_Word) == 0){
-					std::cout <<get_out_console[0] << Temp_Word << std::endl;
-					if (data->Exist(Temp_Word)) std::cout << data->Get_Chinese(Temp_Word) << std::endl;
-					else std::cout << get_out_console[1] << std::endl;
+					Leave += get_out_console[0] + Temp_Word + "\n";
+					if (data->Exist(Temp_Word)) Leave += data->Get_Chinese(Temp_Word);
+					else Leave += get_out_console[1];
 					List.insert(Temp_Word);
 				}
 			}
@@ -23,6 +25,7 @@ void NewWords_Strategy::Run(){
 		Temp_Word = "";
 	}
 	List.clear();
+	return Leave;
 }
 NewWords_Strategy::NewWords_Strategy(User *temp_user, Database *temp_data): Current_User(temp_user), data(temp_data){
 	std::ifstream fin;

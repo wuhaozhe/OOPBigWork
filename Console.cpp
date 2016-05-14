@@ -10,13 +10,13 @@ void Console::Change_Memory_Strategy(){
 		switch (Temp[0]){
 			case '1':
 				{
-					delete memory_strategy;
+					if (memory_strategy) delete memory_strategy;
 					memory_strategy = new Memory_Strategy_Shanbay(Current_User, data);
 				}
 				break;
 			case '2':
 				{
-					delete memory_strategy;
+					if (memory_strategy) delete memory_strategy;
 					memory_strategy = new Memory_Strategy_Towords(Current_User, data);
 				}
 				break;
@@ -98,8 +98,11 @@ void Console::Test(){
 	}
 }
 void Console::NewWords(){
-	newwords_strategy = new NewWords_Strategy1(Current_User, data);
-	newwords_strategy->Run();
+	if (newwords_strategy) delete newwords_strategy;
+	newwords_strategy = new NewWords_Strategy2(Current_User, data);
+	std::string Temp_filename;
+	getline(std::cin, Temp_filename);
+	Out->Print(newwords_strategy->Run(Temp_filename));
 }
 void Console::Setup(){
 	std::ifstream Fin;
