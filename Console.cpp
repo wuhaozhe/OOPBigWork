@@ -93,7 +93,7 @@ void Console::Test(){
 				Out->Print(test_strategy->Work(test_strategy->Test_Word(Temp)));
 			}
 			std::stringstream ss; ss << level; Temp.clear(); ss >> Temp;
-			Out->Print(get_out_console[2] + Temp);
+			Out->Print(get_out_console[45] + Temp);
 		}
 	}
 }

@@ -24,6 +24,7 @@ bool Test_Strategy::End(){
 	return Count == times;
 }
 std::string Test_Strategy::Get_Word(){
+	int temp; std::string Temp_Word;
 	while (1){
 		temp = rand()%data->Get_Words_Size();
 		Temp_Word = data->Get_English(temp);

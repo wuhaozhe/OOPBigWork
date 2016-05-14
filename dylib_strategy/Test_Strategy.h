@@ -15,7 +15,7 @@ public:
 	void Init();
 	bool End();
 	std::string Get_Word();
-	void Work(bool Result);
+	std::string Work(bool Result);
 	
 	virtual std::string Get_Query(std::string Temp_Word) = 0;
 	virtual bool Check(std::string Temp) = 0;
