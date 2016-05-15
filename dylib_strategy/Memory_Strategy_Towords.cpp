@@ -80,3 +80,4 @@ std::string Memory_Strategy_Towords::Work(std::string Ans){
 	}
 	return Temp_ans;
 }
+Memory_Strategy_Towords::~Memory_Strategy_Towords(){}

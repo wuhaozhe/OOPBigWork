@@ -10,5 +10,6 @@ public:
 	std::string Get_Query();
 	bool Check(std::string Temp);
 	std::string Work(std::string Ans);
+	~Memory_Strategy_Towords();
 };
 #endif

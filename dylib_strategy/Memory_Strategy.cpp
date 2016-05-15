@@ -101,3 +101,4 @@ std::string Memory_Strategy::First_Word()
 {
 	return Wanted_Words.front();
 }
+Memory_Strategy::~Memory_Strategy(){}

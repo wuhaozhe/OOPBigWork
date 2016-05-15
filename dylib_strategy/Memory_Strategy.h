@@ -29,5 +29,7 @@ public:
 	Memory_Strategy(User *temp_user, Database *temp_data);
 	Memory_Strategy() = default;
 	std::string First_Word();
+	
+	virtual ~Memory_Strategy();
 };
 #endif

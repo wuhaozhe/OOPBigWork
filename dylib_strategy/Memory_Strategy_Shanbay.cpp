@@ -50,3 +50,4 @@ std::string Memory_Strategy_Shanbay::Work(std::string Ans){
 		return Temp_ans;
 	}
 }
+Memory_Strategy_Shanbay::~Memory_Strategy_Shanbay() {}
