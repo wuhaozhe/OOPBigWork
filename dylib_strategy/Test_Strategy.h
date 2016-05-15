@@ -22,5 +22,6 @@ public:
 	
 	virtual std::string Get_Query(std::string Temp_Word) = 0;
 	virtual bool Check(std::string Temp) = 0;
+	virtual ~Test_Strategy();
 };
 #endif

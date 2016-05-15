@@ -8,3 +8,6 @@ std::string NewWords_Strategy2::GetText(std::string Filename){
 }
 NewWords_Strategy2::NewWords_Strategy2(User *temp_user, Database *temp_data): NewWords_Strategy(temp_user, temp_data){
 }
+
+NewWords_Strategy2::~NewWords_Strategy2(){
+}

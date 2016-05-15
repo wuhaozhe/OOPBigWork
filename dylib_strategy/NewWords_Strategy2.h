@@ -7,5 +7,7 @@ public:
 	std::string GetText(std::string Filename);
 	NewWords_Strategy2(User *temp_user, Database *temp_data);
 	NewWords_Strategy2() = default;
+	
+	~NewWords_Strategy2();
 };
 #endif

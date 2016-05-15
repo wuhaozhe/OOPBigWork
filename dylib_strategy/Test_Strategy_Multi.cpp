@@ -29,3 +29,6 @@ bool Test_Strategy_Multi::Check(std::string Temp){
 Test_Strategy_Multi::Test_Strategy_Multi(Database *temp_data): Test_Strategy(temp_data){
 	
 }
+
+Test_Strategy_Multi::~Test_Strategy_Multi(){
+}

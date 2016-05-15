@@ -8,5 +8,7 @@ public:
 	Test_Strategy_Multi() = default;
 	std::string Get_Query(std::string Temp_Word);
 	bool Check(std::string Temp);
+	
+	~Test_Strategy_Multi();
 };
 #endif

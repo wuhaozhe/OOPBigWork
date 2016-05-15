@@ -27,3 +27,6 @@ bool Test_Strategy_TF::Test_Word(std::string Temp_Word){
 }
 Test_Strategy_TF::Test_Strategy_TF(Database *temp_data): Test_Strategy(temp_data){
 }
+
+Test_Strategy_TF::~Test_Strategy_TF(){
+}

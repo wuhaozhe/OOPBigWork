@@ -43,3 +43,6 @@ NewWords_Strategy::NewWords_Strategy(User *temp_user, Database *temp_data): Curr
 	}
 	fin.close();
 }
+
+NewWords_Strategy::~NewWords_Strategy(){
+}

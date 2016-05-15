@@ -11,5 +11,7 @@ public:
 	std::string Run(std::string filename);
 	NewWords_Strategy(User *temp_user, Database *temp_data);
 	NewWords_Strategy() = default;
+	
+	virtual ~NewWords_Strategy();
 };
-#endif 
+#endif

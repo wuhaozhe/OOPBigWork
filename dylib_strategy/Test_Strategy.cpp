@@ -55,3 +55,6 @@ int Test_Strategy::Get_Answer(){
 int Test_Strategy::Get_Level(){
 	return level;
 }
+
+Test_Strategy::~Test_Strategy(){
+}
