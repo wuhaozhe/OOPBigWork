@@ -77,6 +77,6 @@ std::string Memory_Strategy_Towords::Work(std::string Ans){
 		temp_right_times++;
 		temp_whole_times++;
 		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
-		return Temp_ans;
 	}
+	return Temp_ans;
 }
