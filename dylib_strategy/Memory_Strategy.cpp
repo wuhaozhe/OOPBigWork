@@ -91,6 +91,8 @@ void Memory_Strategy::Run()
 	}
 }
 void Memory_Strategy::Init(int Temp){
+	Recited_Times = 0;
+	Right_Times = 0;
 	Word_Num = Temp;
 	Get_Words_Queue();
 }

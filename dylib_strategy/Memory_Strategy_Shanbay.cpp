@@ -46,8 +46,8 @@ std::string Memory_Strategy_Shanbay::Work(std::string Ans){
 		temp_right_times++;
 		temp_whole_times++;
 		Current_User->Change_Memory_times(First_Word(), temp_right_times, temp_whole_times);
-		Temp_ans += get_out_console[3];
-		return Temp_ans;
+		//Temp_ans += get_out_console[3];
+		return "";
 	}
 }
 Memory_Strategy_Shanbay::~Memory_Strategy_Shanbay() {}

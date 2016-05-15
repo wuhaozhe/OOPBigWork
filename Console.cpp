@@ -292,8 +292,6 @@ Console::Console(Database *temp_data, Output *temp_out):data(temp_data), Current
 	fin.close();
 }
 void Console::Memory(){
-	memory_strategy->Recited_Times = 0;
-	memory_strategy->Right_Times = 0;
 	Out->Print(get_out_console[38]);
 	std::string temp_input;
 	temp_input.clear();
