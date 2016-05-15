@@ -1,4 +1,6 @@
 #include "Console.h"
+#include <ctime>
+#include "Output_Screen.h" 
 using namespace std;
 int main()
 {

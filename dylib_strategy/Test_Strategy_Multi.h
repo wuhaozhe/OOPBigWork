@@ -1,3 +1,5 @@
+#ifndef TEST_STRATEGY_MULTI
+#define TEST_STRATEGY_MULTI
 #include "Test_Strategy.h"
 class Test_Strategy_Multi: public Test_Strategy{
 public:
@@ -7,3 +9,4 @@ public:
 	std::string Get_Query(std::string Temp_Word);
 	bool Check(std::string Temp);
 };
+#endif

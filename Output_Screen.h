@@ -1,4 +1,4 @@
-#ifndef OUTOUT_SCREEN_H
+#ifndef OUTPUT_SCREEN_H
 #define OUTPUT_SCREEN_H
 #include <iostream>
 #include "Output.h"
