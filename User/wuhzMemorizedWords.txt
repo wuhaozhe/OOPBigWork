@@ -1,4 +1,4 @@
-2 2
+1 2
 
 
 
@@ -14,10 +14,3 @@
 
 
 
-impound 2 4
-confound 3 5
-colonization 3 5
-complacent 2 5
-uranium 1 2
-inferiority 1 2
-jockey 0 2
